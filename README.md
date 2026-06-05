@@ -6,7 +6,7 @@ A reproducible research toolkit for screening residential real estate in Lincoln
 
 **Primary tenant thesis:** stable, dual-income, upper-middle-class families seeking 3BR+ units.
 
-**Deliverables:** an interactive Streamlit screener (filter → ranked shortlist → map → per-property drill-down) plus parameterized, reproducible Quarto reports (per-property deal memos, neighborhood profiles, longitudinal market analyses), designed for a statistically-literate non-specialist via progressive disclosure (headline go/no-go → drill-down evidence).
+**Deliverables:** the shared finance/data **engine** (`src/lp_reit_lab`) plus parameterized, reproducible Quarto reports (per-property deal memos, neighborhood profiles, longitudinal market analyses), designed for a statistically-literate non-specialist via progressive disclosure (headline go/no-go → drill-down evidence). The interactive user-facing screener now lives in the separate [north-side-property-compass](https://github.com/s-koirala/north-side-property-compass) app, which consumes this engine.
 
 > **Fair Housing boundary.** Familial status is a protected class under the Fair Housing Act (42 U.S.C. §3604; 1988 Fair Housing Amendments Act). The "family tenant" thesis here is strictly **market-demand analysis** — which unit configurations and locations the market rewards with higher rent, occupancy, and appreciation — and is **never** a tenant-screening, steering, or advertising instrument. See the research memo under [docs/research_notes/](docs/research_notes/) for the compliance boundary.
 
@@ -79,13 +79,15 @@ python ~/.claude/scripts/build_data_manifest.py --check
 
 ## Running the v0 (synthetic data)
 
+> **The v0 Streamlit screener has been retired.** The user-facing UI is being replaced
+> by the [north-side-property-compass](https://github.com/s-koirala/north-side-property-compass)
+> app (merged separately). The shared finance/data engine (`src/lp_reit_lab`), the
+> synthetic generator, and the Quarto report remain active.
+
 ```bash
 # Sync env (runtime + dev tools), then (optionally) regenerate synthetic listings
 uv sync --extra dev
 uv run python scripts/generate_synthetic.py --n 150 --seed 20260605
-
-# Interactive screener: filters -> ranked shortlist -> map -> per-property drill-down
-uv run streamlit run app/streamlit_app.py
 
 # Per-property deal memo (requires the Quarto CLI: https://quarto.org)
 quarto render reports/property_memo.qmd -P property_id:SYN-0001 --to html
