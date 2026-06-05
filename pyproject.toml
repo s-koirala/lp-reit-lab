@@ -1,0 +1,64 @@
+[project]
+name = "lp-reit-lab"
+version = "0.0.1"
+description = "Data pipeline and statistical models for evaluating Lincoln Park (Chicago) residential investment property on long-run appreciation and net rental yield."
+requires-python = ">=3.11"
+authors = [{name = "SKIE", email = "238704148+s-koirala@users.noreply.github.com"}]
+license = {text = "MIT"}
+readme = "README.md"
+dependencies = [
+    # Foundational data + stats stack
+    "pandas",
+    "numpy",
+    "scipy",
+    # Investment math
+    "numpy-financial",      # IRR / NPV / PMT (imports as numpy_financial)
+    # Config + validation
+    "pyyaml",               # assumptions/scoring config + precommit_citation_cff
+    "pandera",              # dataframe schema validation (validate-data SKILL.md §2)
+    "pyarrow",              # parquet IO
+    # Visualization / deliverable layer (ADR-0002)
+    "matplotlib",           # static figures for Quarto / PDF
+    "great-tables",         # publication tables (R2-C)
+    "plotly",               # interactive charts: tornado, waterfall, scatter, time series
+    "folium",               # Leaflet maps on free OSM tiles (no Mapbox lock-in)
+    "streamlit",            # interactive property screener
+    "streamlit-folium",     # embed Folium maps in Streamlit
+]
+
+[project.optional-dependencies]
+# Tooling defaults per user CLAUDE.md; install via `uv sync --extra dev`.
+dev = [
+    "ruff",
+    "pytest",
+    "pre-commit",
+    "nbstripout",
+    "nbqa",
+    "jsonschema>=4.18",     # Draft 2020-12 support (R1-A schema)
+]
+
+[tool.uv]
+# No [build-system] declaration: lp-reit-lab is a NON-PACKAGE project (SKIE
+# convention). src/ is imported via tool.pytest pythonpath (tests) and an
+# app-level sys.path shim (Streamlit/scripts), not pip-installed. package = false
+# tells uv to manage the environment without trying to build lp-reit-lab itself.
+package = false
+
+[tool.ruff]
+line-length = 100  # user's CLAUDE.md tooling defaults; matches SKIE-Universe
+target-version = "py311"
+src = ["src"]
+
+[tool.ruff.lint]
+# E/F/W pycodestyle+pyflakes; I isort; N naming; B bugbear; UP pyupgrade;
+# SIM simplify; PL pylint (PLR0913 off — research signatures grow naturally).
+select = ["E", "F", "W", "I", "N", "B", "UP", "SIM", "PL"]
+ignore = ["PLR0913"]
+
+[tool.ruff.lint.per-file-ignores]
+# Test files compare against literal expected values (not magic constants).
+"tests/**" = ["PLR2004"]
+
+[tool.pytest.ini_options]
+pythonpath = [".", "src"]
+testpaths = ["tests"]

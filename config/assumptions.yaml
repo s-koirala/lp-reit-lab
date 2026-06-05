@@ -1,0 +1,72 @@
+# lp-reit-lab — financing & operating assumptions (v0)
+# DISCIPLINE: no magic numbers. Every value carries a cited basis and is
+# user-adjustable in the screener. Refresh time-sensitive rates from the cited
+# source before any analytic (non-demo) use. The synthetic v0 uses these as
+# central values. See docs/research_notes/research_market-scoping_2026-06-05.md
+# §4.5 (carrying costs) and §7 (professional practice).
+
+meta:
+  currency: USD
+  as_of: "2026-06-05"
+  geography: "Lincoln Park / North Side Chicago"
+  note: "Defaults are documented central values, not deal-specific. Override per property."
+
+financing:
+  # 30-yr fixed INVESTOR mortgage = owner-occupied PMMS + ~50-75 bps investor premium.
+  # Source: Freddie Mac PMMS https://www.freddiemac.com/pmms  (REFRESH before use).
+  mortgage_rate_annual: 0.0700
+  amortization_years: 30
+  # Investment-property conventional LTV commonly <= 75-80% -> 20-25% down.
+  # Source: research memo §4 (residential investor loans 75-80% LTV).
+  down_payment_fraction: 0.25
+  # Buyer closing costs ~2-5% of price; central value 3%.
+  closing_cost_fraction: 0.03
+
+income:
+  # Vacancy allowance. Metro ACS rental vacancy ~5.1% (Census B25004 / FRED ILRVAC).
+  # LP 3BR family stock likely lower (longer tenancy); user-adjustable.
+  vacancy_rate: 0.05
+  # Annual market-rent growth assumption (to be replaced by a hedonic/ZORI forecast).
+  rent_growth_annual: 0.03
+  # Other income (parking/storage) as a fraction of gross potential rent.
+  other_income_fraction: 0.0
+
+operating_expenses:
+  # Property tax: Chicago residential effective rate ~1.66% of MARKET value, with
+  # NO homeowner exemption (rental). Source: Cook County Assessor mechanics
+  # (10% assessment x 3.0355 equalizer x local rate); SmartAsset effective rate.
+  # Reassessment 2024; next Chicago reassessment 2027.
+  property_tax_rate_of_value: 0.0166
+  # Landlord HO-6 / DP-3 insurance ~ $1,050/yr IL average. Source: Baselane.
+  insurance_annual: 1050
+  # Maintenance/repairs reserve as a fraction of effective gross income.
+  maintenance_reserve_fraction: 0.08
+  # Professional property management as a fraction of EGI (8-10% typical).
+  property_management_fraction: 0.08
+  # Owner-paid utilities during vacancy / common areas. Water is often bundled in
+  # HOA (avoid double counting); tenant typically pays own electric/gas.
+  owner_paid_utilities_monthly: 0
+  # HOA monthly: per-property (listing/MLS-derived). Central value for synthetic v0;
+  # Lincoln Park typical $300-$600/mo. Source: research memo §4.5.
+  hoa_monthly_default: 450
+  # General cost inflation for fixed cash costs (insurance/HOA/utilities), decoupled
+  # from rent growth. Basis: US CPI-U (BLS, ~2-3%/yr), https://www.bls.gov/cpi/.
+  cost_inflation_annual: 0.025
+
+exit:
+  # Hold period 5-10 yr; central value 7. Source: research memo §7 (buy-and-hold).
+  hold_years: 7
+  # Exit cap = going-in cap + spread (exit >= going-in by +25-100 bps, conservative).
+  exit_cap_spread: 0.0050
+  # Selling costs (broker ~5% + Chicago/IL transfer taxes). Source: research memo §5.
+  selling_cost_fraction: 0.06
+  # Long-run constant-quality appreciation. ZHVI 60614 +2.5% YoY (Zillow, Apr 2026);
+  # to be replaced by the repeat-sales / hedonic forecast.
+  appreciation_annual: 0.025
+
+valuation:
+  # DCF discount rate / required return (rate build-up: risk-free + risk + growth premia).
+  # Source: Adventures in CRE rate build-up; user-adjustable. Tie to cap+growth in app.
+  discount_rate: 0.08
+  # 10-yr Treasury for the cap-rate-spread risk gauge. Source: FRED DGS10 (REFRESH).
+  treasury_10y: 0.045

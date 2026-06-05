@@ -1,0 +1,12 @@
+{
+  "notice": "SYNTHETIC DATA \u2014 not real listings. Calibrated to published Lincoln Park / North Side aggregates for UI scaffolding only (research memo \u00a75).",
+  "n": 150,
+  "seed": 20260605,
+  "output": "data/interim/synthetic_listings.csv",
+  "sha256": "162ed3e3d290dff8c0ac2d6bf122b8ed06b957a7a3940d6efa1a7d6ac5e2129d",
+  "git_head": "unknown",
+  "rows": 150,
+  "numpy": "2.4.6",
+  "pandas": "3.0.3",
+  "note": "Lightweight provenance subset; the full 13-field ReproLog (emit-repro-log) is required for non-synthetic artifact runs (memo \u00a711)."
+}

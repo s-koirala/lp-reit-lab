@@ -1,0 +1,105 @@
+---
+title: "Deal Memo"
+subtitle: "lp-reit-lab — SYNTHETIC scaffolding data"
+format:
+  html:
+    toc: true
+    embed-resources: true
+    theme: cosmo
+params:
+  property_id: "SYN-0001"
+  n: 150
+  seed: 20260605
+jupyter: python3
+execute:
+  echo: false
+  warning: false
+---
+
+```{python}
+import sys
+from pathlib import Path
+
+# Robust repo-root detection (works whether rendered from repo root or reports/).
+_repo = Path.cwd()
+if not (_repo / "src").exists():
+    _repo = _repo.parent
+sys.path.insert(0, str((_repo / "src").resolve()))
+
+import pandas as pd
+from IPython.display import Markdown
+
+from lp_reit_lab import scoring
+from lp_reit_lab.config import Assumptions, load_scoring
+from lp_reit_lab.finance.evaluate import evaluate_property
+from lp_reit_lab.synthetic import SYNTHETIC_NOTICE, generate_listings
+
+a = Assumptions.load()
+bands = load_scoring()
+listings = generate_listings(params["n"], params["seed"])
+match = listings.loc[listings["property_id"] == params["property_id"]]
+src = match.iloc[0] if len(match) else listings.iloc[0]
+res = evaluate_property(float(src["price"]), float(src["est_monthly_rent"]),
+                        float(src["hoa_monthly"]), a)
+sc = scoring.score_property(res, bands)
+
+
+def _pct(value: float) -> str:
+    return "n/a" if value != value else f"{value:.1%}"
+
+
+Markdown(
+    f"## {src['property_id']} — {src['neighborhood']} · {int(src['beds'])}BR · "
+    f"{int(src['sqft']):,} sqft · built {int(src['year_built'])}\n\n"
+    f"**Verdict: {sc['verdict']}** (composite score {sc['composite_score']:.2f})"
+)
+```
+
+::: {.callout-note}
+SYNTHETIC DATA — not real listings. Calibrated to published Lincoln Park / North
+Side aggregates for UI scaffolding only (research memo §5). Replace with real
+ingested data before any investment use.
+:::
+
+### Headline metrics (the go/no-go numbers — research memo §7)
+
+```{python}
+pd.DataFrame({
+    "Metric": ["Price", "Monthly cash flow", "Cash-on-cash", "Going-in cap rate",
+               "Cap-rate spread vs 10y UST", "Levered IRR", "Equity multiple", "DSCR"],
+    "Value": [f"${res['price']:,.0f}", f"${res['monthly_cash_flow']:,.0f}",
+              _pct(res['cash_on_cash']), f"{res['going_in_cap']:.2%}",
+              f"{res['cap_rate_spread']:.2%}", _pct(res['levered_irr']),
+              f"{res['equity_multiple']:.2f}x", f"{res['dscr']:.2f}"],
+})
+```
+
+### Levered pro forma (DCF over the hold)
+
+```{python}
+pf = res["proforma"].copy()
+for col in ["gross_potential_rent", "egi", "opex", "noi", "debt_service", "levered_cash_flow"]:
+    pf[col] = pf[col].map(lambda v: f"${v:,.0f}")
+pf.rename(columns={
+    "gross_potential_rent": "GPR", "egi": "EGI", "opex": "OpEx", "noi": "NOI",
+    "debt_service": "Debt service", "levered_cash_flow": "Levered CF",
+})
+```
+
+```{python}
+Markdown(
+    f"- Equity in **${res['equity_invested']:,.0f}**; exit cap **{res['exit_cap']:.2%}**; "
+    f"projected sale **${res['sale_price']:,.0f}**; net reversion "
+    f"**${res['net_reversion']:,.0f}**.\n"
+    f"- Loan **${res['loan']:,.0f}** (LTV {res['ltv']:.0%}); annual debt service "
+    f"**${res['annual_debt_service']:,.0f}**."
+)
+```
+
+### Compliance & provenance
+
+- This memo is **market-demand analysis** only — never tenant screening, steering,
+  or advertising (Fair Housing Act §3604; familial status protected; research memo §3).
+- All financing/operating assumptions are documented and adjustable in
+  `config/assumptions.yaml`; scoring benchmarks are cited in `config/scoring.yaml`.
+- Render: `quarto render reports/property_memo.qmd -P property_id:SYN-0001 --to html`.

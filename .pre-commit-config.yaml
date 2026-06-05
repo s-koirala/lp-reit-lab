@@ -1,0 +1,57 @@
+## Pre-commit config — pinned versions for reproducibility.
+## Auto-installed via `uv run pre-commit install` after bootstrap.
+##
+## Hooks registered:
+##   - ruff (lint + format)
+##   - nbstripout (notebook output cleanup)
+##   - nbqa (apply ruff to notebooks)
+##   - seed-guard (~/.claude/hooks/precommit_seed_guard.py) — flags un-seeded
+##     RNG calls and magic numbers in Python / notebook code
+##   - citation-cff (~/.claude/hooks/precommit_citation_cff.py) — validates
+##     CITATION.cff against CFF v1.2.0 minimum schema
+##   - data-manifest-check (~/.claude/scripts/build_data_manifest.py --check)
+##     — exits non-zero if data/ files have drifted since last manifest update
+
+repos:
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.6.9  # justify: SKIE-Universe parity (memo §C.2 ruff pin)
+    hooks:
+      - id: ruff
+        args: [--fix]
+      - id: ruff-format
+
+  - repo: https://github.com/kynan/nbstripout
+    rev: 0.7.1  # justify: SKIE-Universe parity
+    hooks:
+      - id: nbstripout
+
+  - repo: https://github.com/nbQA-dev/nbQA
+    rev: 1.8.7  # justify: SKIE-Universe parity
+    hooks:
+      - id: nbqa-ruff
+        args: [--fix]
+
+  # Local hooks from ~/.claude/hooks/
+  - repo: local
+    hooks:
+      - id: seed-guard
+        name: Seed + magic-number guard
+        entry: python -m claude_precommit_seed_guard
+        language: system
+        files: \.(py|ipynb)$
+        pass_filenames: true
+
+      - id: citation-cff
+        name: CITATION.cff validator (CFF v1.2.0)
+        entry: python C:/Users/skoir/.claude/hooks/precommit_citation_cff.py
+        language: system
+        files: ^CITATION\.cff(\.tmpl)?$
+        pass_filenames: true
+
+      - id: data-manifest-check
+        name: Data manifest drift check
+        entry: python C:/Users/skoir/.claude/scripts/build_data_manifest.py --check
+        language: system
+        pass_filenames: false
+        always_run: true
+        stages: [pre-push]  # pre-push only; rebuilding manifest on every commit is costly

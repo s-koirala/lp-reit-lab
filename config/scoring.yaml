@@ -1,0 +1,53 @@
+# lp-reit-lab — go/no-go scoring bands (v0)
+# Cited benchmarks, user-adjustable. These are SCREENS, not valuation
+# (research memo §7). Traffic-light semantics: green = pass, amber = caution,
+# red = fail. Sources inline. No magic numbers: every band has a basis.
+
+dscr:
+  # Lender convention: < 1.0 fails (NOI can't cover debt); >= 1.20-1.25 comfortable.
+  # Source: PropertyMetrics; JPMorgan DSCR explainer.
+  red_below: 1.00
+  amber_below: 1.25
+
+cash_on_cash:
+  # "Good" commonly cited 8-12%; MARKET-DEPENDENT, single-year metric.
+  # Source: DSCR Direct; PropertyMetrics.
+  red_below: 0.04
+  amber_below: 0.08
+
+cap_rate_spread_over_treasury:
+  # Normalized cap-rate minus 10-yr Treasury spread historically ~2-4%
+  # (25-yr avg ~2.4%); compressed/negative flags overpricing.
+  # Source: Wall Street Prep cap-rate-spread; NAIOP.
+  red_below: 0.01
+  amber_below: 0.02
+
+break_even_occupancy:
+  # Lower is safer; lenders wary > 90%; normal 60-80%. Source: PropertyMetrics; Mashvisor.
+  red_above: 0.90
+  amber_above: 0.85
+
+rules_of_thumb:  # screens only; UI must label "filter, not valuation".
+  # Reserved for the UI/report Tier-3 tripwire layer (memo §7); NOT consumed by the
+  # composite scoring below — surfaced separately in the app/report.
+  # 1% rule: monthly rent >= 1% of price (~ GRM <= 8.3). Source: RealWealth.
+  one_percent_rule: 0.01
+  # 50% rule: operating expenses ~ 50% of gross rent (first-pass). Source: BrightPath.
+  fifty_percent_expense_rule: 0.50
+
+composite:
+  # Traffic-light -> numeric score for the weighted composite. amber = half a green
+  # is a documented linear-midpoint convention, not a fitted value; user-adjustable.
+  light_scores:
+    green: 1.0
+    amber: 0.5
+    red: 0.0
+  # Weighted go/no-go over the Tier-1 gates (research memo §7). Weights user-adjustable.
+  weights:
+    cash_on_cash: 0.30
+    cap_rate_spread: 0.25
+    dscr: 0.25
+    break_even_occupancy: 0.20
+  # green if composite >= green_min; amber if >= amber_min; else red.
+  green_min: 0.75
+  amber_min: 0.50

@@ -1,0 +1,47 @@
+# Citation File Format v1.2.0 — see https://citation-file-format.github.io/
+# Placeholders use <<KEY>> syntax (not Jinja {{KEY}}) to keep raw YAML parseable
+# during validation. Substitute with `bootstrap_project.py` or by hand.
+cff-version: 1.2.0
+message: "If you use this work, please cite it as below."
+type: software  # software | dataset | book | article — pick one
+title: "lp-reit-lab"
+abstract: "Data pipeline and statistical models for evaluating Lincoln Park (Chicago) residential investment property on long-run appreciation and net rental yield."
+
+# Authors — for SKIE pseudonym projects, list only the pseudonym.
+# Per rules/publishing.md, never insert real-name metadata. Real ORCID
+# is acceptable ONLY if it is publicly bound to the SKIE pseudonym; otherwise omit.
+authors:
+  - name: SKIE
+    # orcid: https://orcid.org/<<TODO: pseudonym-bound ORCID or omit>>  # uncomment only if pseudonym-bound
+
+# Versioning per Semantic Versioning 2.0.0 (https://semver.org/).
+# date-released is the ISO 8601 calendar date of the corresponding git tag.
+version: "0.0.1"
+date-released: "2026-06-05"
+url: "https://github.com/s-koirala/lp-reit-lab"
+repository-code: "https://github.com/s-koirala/lp-reit-lab"
+license: MIT  # SPDX identifier, e.g. MIT, Apache-2.0, CC-BY-4.0
+
+keywords:
+  - quant
+  - research
+
+# Zenodo-minted concept DOI; leave the placeholder until the first Zenodo
+# release. Per rules/publishing.md SKIE workflow, each release tagged
+# `skie-v{MAJOR.MINOR}` gets a fresh DOI under the concept DOI.
+# doi: <<TODO: Zenodo concept DOI>>  # uncomment + fill on first Zenodo release
+
+# Optional: preferred citation if the work has a canonical published form.
+# No published form yet — uncomment and fill on publication.
+# preferred-citation:
+#   type: article
+#   authors:
+#     - name: SKIE
+#   title: "<<TODO>>"
+#   year: 2026
+#   journal: "<<TODO>>"
+#   doi: <<TODO>>
+
+# References — auto-populated by /cite-add (R1-C); each entry must conform
+# to CFF v1.2.0 reference schema. Start empty.
+references: []
