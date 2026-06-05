@@ -6,7 +6,7 @@ A reproducible research toolkit for screening residential real estate in Lincoln
 
 **Primary tenant thesis:** stable, dual-income, upper-middle-class families seeking 3BR+ units.
 
-**Deliverables:** the shared finance/data **engine** (`src/lp_reit_lab`) plus parameterized, reproducible Quarto reports (per-property deal memos, neighborhood profiles, longitudinal market analyses), designed for a statistically-literate non-specialist via progressive disclosure (headline go/no-go → drill-down evidence). The interactive user-facing screener now lives in the separate [north-side-property-compass](https://github.com/s-koirala/north-side-property-compass) app, which consumes this engine.
+**Deliverables:** the shared finance/data **engine** (`src/lp_reit_lab`) plus parameterized, reproducible Quarto reports (per-property deal memos, neighborhood profiles, longitudinal market analyses), designed for a statistically-literate non-specialist via progressive disclosure (headline go/no-go → drill-down evidence). The interactive user-facing screener is a React/TypeScript SPA **vendored into [web/](web/)** (consolidated into this repo per [ADR-0003](docs/decisions/ADR-0003.md)): it renders precomputed Python-engine artifacts plus a parity-gated TypeScript mirror of the deterministic cash-flow math, and deploys statically (upstream provenance: [web/PROVENANCE.md](web/PROVENANCE.md)).
 
 > **Fair Housing boundary.** Familial status is a protected class under the Fair Housing Act (42 U.S.C. §3604; 1988 Fair Housing Amendments Act). The "family tenant" thesis here is strictly **market-demand analysis** — which unit configurations and locations the market rewards with higher rent, occupancy, and appreciation — and is **never** a tenant-screening, steering, or advertising instrument. See the research memo under [docs/research_notes/](docs/research_notes/) for the compliance boundary.
 
@@ -51,6 +51,7 @@ lp-reit-lab/
 ├── logs/
 │   └── reproducibility/  # ReproLog records + pip-freeze archive
 ├── outputs/              # scratch outputs (NOT artifacts)
+├── web/                  # React/TS front-end SPA (vendored; see web/PROVENANCE.md)
 ├── CLAUDE.md             # project-local Claude rules
 ├── CHANGELOG.md          # Keep-a-Changelog 1.1.0
 ├── CITATION.cff          # CFF v1.2.0
@@ -79,10 +80,10 @@ python ~/.claude/scripts/build_data_manifest.py --check
 
 ## Running the v0 (synthetic data)
 
-> **The v0 Streamlit screener has been retired.** The user-facing UI is being replaced
-> by the [north-side-property-compass](https://github.com/s-koirala/north-side-property-compass)
-> app (merged separately). The shared finance/data engine (`src/lp_reit_lab`), the
-> synthetic generator, and the Quarto report remain active.
+> **The v0 Streamlit screener has been retired** ([ADR-0003](docs/decisions/ADR-0003.md)).
+> The user-facing UI is now the React/TypeScript SPA vendored under [web/](web/), which
+> renders precomputed Python-engine artifacts. The shared finance/data engine
+> (`src/lp_reit_lab`), the synthetic generator, and the Quarto report remain active.
 
 ```bash
 # Sync env (runtime + dev tools), then (optionally) regenerate synthetic listings

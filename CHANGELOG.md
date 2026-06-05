@@ -14,6 +14,18 @@ and this project adheres to [Semantic Versioning 2.0.0](https://semver.org/spec/
   deflation utilities, a content-addressed provenance manifest with source-version
   binding, and a `scripts/ingest.py` CLI. Audited via a 3-specialist loop
   (`docs/audits/audit_trail_2026-06-05_ingestion.md`).
+- **Front-end consolidation (P0):** vendored the `north-side-property-compass`
+  React/TypeScript SPA into `web/` (upstream `bff9b480cbf7`; provenance in
+  `web/PROVENANCE.md`), stripped the Lovable telemetry sink and `.lovable/`
+  scaffolding, and recorded the UI architecture in **ADR-0003** (React static SPA +
+  precomputed Python artifacts + parity-gated TS deterministic-DCF mirror) with a
+  plan memo (`docs/methodology/methodology_react-merge_2026-06-05.md`). Audited via a
+  3-specialist loop (`docs/audits/audit_trail_2026-06-05_react-merge-p0.md`).
+
+### Changed
+- Superseded the **interactive-screener** portion of ADR-0002 (Streamlit) with
+  **ADR-0003**; ADR-0002's Quarto-report, free-OSM-tile, and DRY shared-engine
+  decisions remain in force.
 
 ### Removed
 - Retired the v0 Streamlit screener (`app/streamlit_app.py`) and its smoke test;
