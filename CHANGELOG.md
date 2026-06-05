@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning 2.0.0](https://semver.org/spec/
 
 ## [Unreleased]
 
+### Added
+- Open-data **ingestion layer** (`src/lp_reit_lab/ingest/`, ADR-0001): a Cook County
+  Assessor Socrata connector (geography spine via `chicago_community_area_num`, batched
+  `pin in(...)` sales), pandera no-look-ahead validation, integer-cents money + CPI
+  deflation utilities, a content-addressed provenance manifest with source-version
+  binding, and a `scripts/ingest.py` CLI. Audited via a 3-specialist loop
+  (`docs/audits/audit_trail_2026-06-05_ingestion.md`).
+
 ### Removed
 - Retired the v0 Streamlit screener (`app/streamlit_app.py`) and its smoke test;
   the user-facing UI is being replaced by the independent

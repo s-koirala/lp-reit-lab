@@ -851,9 +851,11 @@ dependencies = [
     { name = "plotly" },
     { name = "pyarrow" },
     { name = "pyyaml" },
+    { name = "requests" },
     { name = "scipy" },
     { name = "streamlit" },
     { name = "streamlit-folium" },
+    { name = "tenacity" },
 ]
 
 [package.optional-dependencies]
@@ -883,10 +885,12 @@ requires-dist = [
     { name = "pyarrow" },
     { name = "pytest", marker = "extra == 'dev'" },
     { name = "pyyaml" },
+    { name = "requests", specifier = ">=2.34.2" },
     { name = "ruff", marker = "extra == 'dev'" },
     { name = "scipy" },
     { name = "streamlit" },
     { name = "streamlit-folium" },
+    { name = "tenacity", specifier = ">=9.1.4" },
 ]
 provides-extras = ["dev"]
 
