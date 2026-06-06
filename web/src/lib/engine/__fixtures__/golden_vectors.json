@@ -1,0 +1,1423 @@
+{
+  "_generator": "scripts/export_web_engine_fixtures.py",
+  "_note": "GENERATED \u2014 do not edit by hand. Run the generator to refresh.",
+  "_source": [
+    "config/assumptions.yaml",
+    "config/scoring.yaml",
+    "src/lp_reit_lab/finance"
+  ],
+  "assumptions": {
+    "amortization_years": 30,
+    "appreciation_annual": 0.025,
+    "closing_cost_fraction": 0.03,
+    "cost_inflation_annual": 0.025,
+    "discount_rate": 0.08,
+    "down_payment_fraction": 0.25,
+    "exit_cap_spread": 0.005,
+    "hoa_monthly_default": 450.0,
+    "hold_years": 7,
+    "insurance_annual": 1050.0,
+    "maintenance_reserve_fraction": 0.08,
+    "mortgage_rate_annual": 0.07,
+    "other_income_fraction": 0.0,
+    "owner_paid_utilities_monthly": 0.0,
+    "property_management_fraction": 0.08,
+    "property_tax_rate_of_value": 0.0166,
+    "rent_growth_annual": 0.03,
+    "selling_cost_fraction": 0.06,
+    "treasury_10y": 0.045,
+    "vacancy_rate": 0.05
+  },
+  "cases": [
+    {
+      "carry_monthly": {
+        "hoa": 150.0,
+        "insurance": 87.5,
+        "maintenance": 228.0,
+        "management": 228.0,
+        "mortgage": 1247.4421784609667,
+        "tax": 345.8333333333333,
+        "total": 2436.7755117942997,
+        "vacancy": 150.0
+      },
+      "expected": {
+        "annual_cash_flow": 6758.693858468399,
+        "annual_debt_service": 14969.3061415316,
+        "break_even_occupancy": 0.7622585039314334,
+        "cap_rate_spread": 0.041912000000000005,
+        "cash_on_cash": 0.09655276940669141,
+        "dscr": 1.4515034828312274,
+        "egi": 34200.0,
+        "equity_invested": 70000.0,
+        "equity_multiple": 2.3979287872082398,
+        "exit_cap": 0.09191200000000001,
+        "going_in_cap": 0.086912,
+        "grm": 6.944444444444445,
+        "gross_potential_rent": 36000.0,
+        "hoa_monthly": 150.0,
+        "levered_irr": 0.16482541737345957,
+        "loan": 187500.0,
+        "ltv": 0.75,
+        "monthly_cash_flow": 563.2244882056999,
+        "monthly_rent": 3000.0,
+        "net_reversion": 105344.95559154206,
+        "noi": 21728.0,
+        "npv": 36778.45828758724,
+        "oer": 0.36467836257309943,
+        "opex": 12472.0,
+        "price": 250000.0,
+        "sale_price": 293879.1031665961,
+        "terminal_basis": "exit-cap",
+        "total_equity_in": 70000.0,
+        "unlevered_irr": 0.09941742945017396
+      },
+      "input": {
+        "hoa_monthly": 150.0,
+        "monthly_rent": 3000.0,
+        "price": 250000.0
+      },
+      "proforma": [
+        {
+          "debt_service": 14969.3061415316,
+          "egi": 34200.0,
+          "gross_potential_rent": 36000.0,
+          "levered_cash_flow": 6758.693858468399,
+          "noi": 21728.0,
+          "opex": 12472.0,
+          "year": 1
+        },
+        {
+          "debt_service": 14969.3061415316,
+          "egi": 35226.0,
+          "gross_potential_rent": 37080.0,
+          "levered_cash_flow": 7445.5338584684,
+          "noi": 22414.84,
+          "opex": 12811.16,
+          "year": 2
+        },
+        {
+          "debt_service": 14969.3061415316,
+          "egi": 36282.77999999999,
+          "gross_potential_rent": 38192.399999999994,
+          "levered_cash_flow": 8153.854058468391,
+          "noi": 23123.16019999999,
+          "opex": 13159.6198,
+          "year": 3
+        },
+        {
+          "debt_service": 14969.3061415316,
+          "egi": 37371.263399999996,
+          "gross_potential_rent": 39338.172,
+          "levered_cash_flow": 8884.320739468396,
+          "noi": 23853.626880999997,
+          "opex": 13517.636518999998,
+          "year": 4
+        },
+        {
+          "debt_service": 14969.3061415316,
+          "egi": 38492.401302000006,
+          "gross_potential_rent": 40518.317160000006,
+          "levered_cash_flow": 9637.620717773407,
+          "noi": 24606.926859305007,
+          "opex": 13885.474442694998,
+          "year": 5
+        },
+        {
+          "debt_service": 14969.3061415316,
+          "egi": 39647.17334106,
+          "gross_potential_rent": 41733.8666748,
+          "levered_cash_flow": 10414.461974724429,
+          "noi": 25383.76811625603,
+          "opex": 14263.40522480397,
+          "year": 6
+        },
+        {
+          "debt_service": 14969.3061415316,
+          "egi": 40836.58854129181,
+          "gross_potential_rent": 42985.882675044006,
+          "levered_cash_flow": 11215.57430566329,
+          "noi": 26184.88044719489,
+          "opex": 14651.708094096917,
+          "year": 7
+        }
+      ],
+      "score": {
+        "composite_score": 1.0,
+        "lights": {
+          "break_even_occupancy": "green",
+          "cap_rate_spread": "green",
+          "cash_on_cash": "green",
+          "dscr": "green"
+        },
+        "verdict": "GO"
+      }
+    },
+    {
+      "carry_monthly": {
+        "hoa": 450.0,
+        "insurance": 87.5,
+        "maintenance": 342.0,
+        "management": 342.0,
+        "mortgage": 5987.722456612641,
+        "tax": 1660.0,
+        "total": 9094.22245661264,
+        "vacancy": 225.0
+      },
+      "expected": {
+        "annual_cash_flow": -55130.669479351694,
+        "annual_debt_service": 71852.6694793517,
+        "break_even_occupancy": 1.970938323691698,
+        "cap_rate_spread": -0.031065,
+        "cash_on_cash": -0.16407937345045148,
+        "dscr": 0.23272621770587665,
+        "egi": 51300.0,
+        "equity_invested": 336000.0,
+        "equity_multiple": 0.3596460168480747,
+        "exit_cap": 0.018935,
+        "going_in_cap": 0.013935,
+        "grm": 22.22222222222222,
+        "gross_potential_rent": 54000.0,
+        "hoa_monthly": 450.0,
+        "levered_irr": -0.2209626731386125,
+        "loan": 900000.0,
+        "ltv": 0.75,
+        "monthly_cash_flow": -4594.2224566126415,
+        "monthly_rent": 4500.0,
+        "net_reversion": 254558.74510129925,
+        "noi": 16722.0,
+        "npv": -465103.5096202708,
+        "oer": 0.6740350877192982,
+        "opex": 34578.0,
+        "price": 1200000.0,
+        "sale_price": 1143495.182712318,
+        "terminal_basis": "exit-cap",
+        "total_equity_in": 707803.5990284095,
+        "unlevered_irr": -0.0036587534769159102
+      },
+      "input": {
+        "hoa_monthly": 450.0,
+        "monthly_rent": 4500.0,
+        "price": 1200000.0
+      },
+      "proforma": [
+        {
+          "debt_service": 71852.6694793517,
+          "egi": 51300.0,
+          "gross_potential_rent": 54000.0,
+          "levered_cash_flow": -55130.669479351694,
+          "noi": 16722.0,
+          "opex": 34578.0,
+          "year": 1
+        },
+        {
+          "debt_service": 71852.6694793517,
+          "egi": 52839.0,
+          "gross_potential_rent": 55620.0,
+          "levered_cash_flow": -54497.15947935169,
+          "noi": 17355.510000000002,
+          "opex": 35483.49,
+          "year": 2
+        },
+        {
+          "debt_service": 71852.6694793517,
+          "egi": 54424.170000000006,
+          "gross_potential_rent": 57288.600000000006,
+          "levered_cash_flow": -53841.347929351694,
+          "noi": 18011.32155,
+          "opex": 36412.848450000005,
+          "year": 3
+        },
+        {
+          "debt_service": 71852.6694793517,
+          "egi": 56056.8951,
+          "gross_potential_rent": 59007.258,
+          "levered_cash_flow": -53162.48337660169,
+          "noi": 18690.186102750005,
+          "opex": 37366.708997249996,
+          "year": 4
+        },
+        {
+          "debt_service": 71852.6694793517,
+          "egi": 57738.601953000005,
+          "gross_potential_rent": 60777.47574000001,
+          "levered_cash_flow": -52459.789764612935,
+          "noi": 19392.87971473876,
+          "opex": 38345.722238261245,
+          "year": 5
+        },
+        {
+          "debt_service": 71852.6694793517,
+          "egi": 59470.760011590006,
+          "gross_potential_rent": 62600.80001220001,
+          "levered_cash_flow": -51732.46564354186,
+          "noi": 20120.203835809836,
+          "opex": 39350.55617578017,
+          "year": 6
+        },
+        {
+          "debt_service": 71852.6694793517,
+          "egi": 61254.88281193771,
+          "gross_potential_rent": 64478.82401256601,
+          "levered_cash_flow": -50979.68335559793,
+          "noi": 20872.986123753763,
+          "opex": 40381.896688183944,
+          "year": 7
+        }
+      ],
+      "score": {
+        "composite_score": 0.0,
+        "lights": {
+          "break_even_occupancy": "red",
+          "cap_rate_spread": "red",
+          "cash_on_cash": "red",
+          "dscr": "red"
+        },
+        "verdict": "NO-GO"
+      }
+    },
+    {
+      "carry_monthly": {
+        "hoa": 0.0,
+        "insurance": 87.5,
+        "maintenance": 319.2,
+        "management": 319.2,
+        "mortgage": 4490.791842459481,
+        "tax": 1245.0,
+        "total": 6671.6918424594805,
+        "vacancy": 210.0
+      },
+      "expected": {
+        "annual_cash_flow": -29660.302109513774,
+        "annual_debt_service": 53889.50210951377,
+        "break_even_occupancy": 1.538498057728448,
+        "cap_rate_spread": -0.01807866666666667,
+        "cash_on_cash": -0.11769961154568957,
+        "dscr": 0.44960890436066064,
+        "egi": 47880.0,
+        "equity_invested": 252000.0,
+        "equity_multiple": 0.6375987032937327,
+        "exit_cap": 0.03192133333333333,
+        "going_in_cap": 0.02692133333333333,
+        "grm": 17.857142857142858,
+        "gross_potential_rent": 50400.0,
+        "hoa_monthly": 0.0,
+        "levered_irr": -0.08475160852448427,
+        "loan": 675000.0,
+        "ltv": 0.75,
+        "monthly_cash_flow": -2471.691842459481,
+        "monthly_rent": 4200.0,
+        "net_reversion": 281647.63810282457,
+        "noi": 24229.199999999997,
+        "npv": -230170.4103178367,
+        "oer": 0.4939598997493735,
+        "opex": 23650.800000000003,
+        "price": 900000.0,
+        "sale_price": 954141.1522223769,
+        "terminal_basis": "exit-cap",
+        "total_equity_in": 441731.8238695876,
+        "unlevered_irr": 0.024493165888979984
+      },
+      "input": {
+        "hoa_monthly": 0.0,
+        "monthly_rent": 4200.0,
+        "price": 900000.0
+      },
+      "proforma": [
+        {
+          "debt_service": 53889.50210951377,
+          "egi": 47880.0,
+          "gross_potential_rent": 50400.0,
+          "levered_cash_flow": -29660.302109513774,
+          "noi": 24229.199999999997,
+          "opex": 23650.800000000003,
+          "year": 1
+        },
+        {
+          "debt_service": 53889.50210951377,
+          "egi": 49316.399999999994,
+          "gross_potential_rent": 51912.0,
+          "levered_cash_flow": -28853.476109513773,
+          "noi": 25036.025999999998,
+          "opex": 24280.373999999996,
+          "year": 2
+        },
+        {
+          "debt_service": 53889.50210951377,
+          "egi": 50795.892,
+          "gross_potential_rent": 53469.36,
+          "levered_cash_flow": -28020.44657951377,
+          "noi": 25869.05553,
+          "opex": 24926.83647,
+          "year": 3
+        },
+        {
+          "debt_service": 53889.50210951377,
+          "egi": 52319.76876,
+          "gross_potential_rent": 55073.440800000004,
+          "levered_cash_flow": -27160.377444863763,
+          "noi": 26729.124664650008,
+          "opex": 25590.64409534999,
+          "year": 4
+        },
+        {
+          "debt_service": 53889.50210951377,
+          "egi": 53889.361822800005,
+          "gross_potential_rent": 56725.64402400001,
+          "levered_cash_flow": -26272.40629945551,
+          "noi": 27617.09581005826,
+          "opex": 26272.266012741744,
+          "year": 5
+        },
+        {
+          "debt_service": 53889.50210951377,
+          "egi": 55506.042677483994,
+          "gross_potential_rent": 58427.41334472,
+          "levered_cash_flow": -25355.643584548303,
+          "noi": 28533.858524965468,
+          "opex": 26972.184152518526,
+          "year": 6
+        },
+        {
+          "debt_service": 53889.50210951377,
+          "egi": 57171.22395780852,
+          "gross_potential_rent": 60180.235745061604,
+          "levered_cash_flow": -24409.171742178725,
+          "noi": 29480.330367335046,
+          "opex": 27690.893590473475,
+          "year": 7
+        }
+      ],
+      "score": {
+        "composite_score": 0.0,
+        "lights": {
+          "break_even_occupancy": "red",
+          "cap_rate_spread": "red",
+          "cash_on_cash": "red",
+          "dscr": "red"
+        },
+        "verdict": "NO-GO"
+      }
+    },
+    {
+      "carry_monthly": {
+        "hoa": 700.0,
+        "insurance": 87.5,
+        "maintenance": 456.0,
+        "management": 456.0,
+        "mortgage": 8732.095249226768,
+        "tax": 2420.8333333333335,
+        "total": 13152.428582560102,
+        "vacancy": 300.0
+      },
+      "expected": {
+        "annual_cash_flow": -85829.14299072122,
+        "annual_debt_service": 104785.14299072122,
+        "break_even_occupancy": 2.1420714304266837,
+        "cap_rate_spread": -0.034168,
+        "cash_on_cash": -0.17516151630759433,
+        "dscr": 0.18090350844564448,
+        "egi": 68400.0,
+        "equity_invested": 490000.0,
+        "equity_multiple": 0.2626542175581556,
+        "exit_cap": 0.015832,
+        "going_in_cap": 0.010832,
+        "grm": 24.305555555555557,
+        "gross_potential_rent": 72000.0,
+        "hoa_monthly": 700.0,
+        "levered_irr": -0.31009534899961066,
+        "loan": 1312500.0,
+        "ltv": 0.75,
+        "monthly_cash_flow": -7152.428582560101,
+        "monthly_rent": 6000.0,
+        "net_reversion": 282042.73059562664,
+        "noi": 18956.0,
+        "npv": -760981.3233879474,
+        "oer": 0.7228654970760234,
+        "opex": 49444.0,
+        "price": 1750000.0,
+        "sale_price": 1572715.4683947172,
+        "terminal_basis": "exit-cap",
+        "total_equity_in": 1073817.6345223854,
+        "unlevered_irr": -0.014977164916861296
+      },
+      "input": {
+        "hoa_monthly": 700.0,
+        "monthly_rent": 6000.0,
+        "price": 1750000.0
+      },
+      "proforma": [
+        {
+          "debt_service": 104785.14299072122,
+          "egi": 68400.0,
+          "gross_potential_rent": 72000.0,
+          "levered_cash_flow": -85829.14299072122,
+          "noi": 18956.0,
+          "opex": 49444.0,
+          "year": 1
+        },
+        {
+          "debt_service": 104785.14299072122,
+          "egi": 70452.0,
+          "gross_potential_rent": 74160.0,
+          "levered_cash_flow": -85067.96299072122,
+          "noi": 19717.179999999993,
+          "opex": 50734.82000000001,
+          "year": 2
+        },
+        {
+          "debt_service": 104785.14299072122,
+          "egi": 72565.55999999998,
+          "gross_potential_rent": 76384.79999999999,
+          "levered_cash_flow": -84279.13509072123,
+          "noi": 20506.007899999982,
+          "opex": 52059.5521,
+          "year": 3
+        },
+        {
+          "debt_service": 104785.14299072122,
+          "egi": 74742.52679999999,
+          "gross_potential_rent": 78676.344,
+          "levered_cash_flow": -83461.70954122121,
+          "noi": 21323.433449500008,
+          "opex": 53419.093350499985,
+          "year": 4
+        },
+        {
+          "debt_service": 104785.14299072122,
+          "egi": 76984.80260400001,
+          "gross_potential_rent": 81036.63432000001,
+          "levered_cash_flow": -82614.70509242368,
+          "noi": 22170.437898297525,
+          "opex": 54814.36470570249,
+          "year": 5
+        },
+        {
+          "debt_service": 104785.14299072122,
+          "egi": 79294.34668212,
+          "gross_potential_rent": 83467.7333496,
+          "levered_cash_flow": -81737.10797402947,
+          "noi": 23048.035016691756,
+          "opex": 56246.31166542824,
+          "year": 6
+        },
+        {
+          "debt_service": 104785.14299072122,
+          "egi": 81673.17708258361,
+          "gross_potential_rent": 85971.76535008801,
+          "levered_cash_flow": -80827.87084254724,
+          "noi": 23957.27214817397,
+          "opex": 57715.90493440964,
+          "year": 7
+        }
+      ],
+      "score": {
+        "composite_score": 0.0,
+        "lights": {
+          "break_even_occupancy": "red",
+          "cap_rate_spread": "red",
+          "cash_on_cash": "red",
+          "dscr": "red"
+        },
+        "verdict": "NO-GO"
+      }
+    },
+    {
+      "carry_monthly": {
+        "hoa": 300.0,
+        "insurance": 87.5,
+        "maintenance": 258.40000000000003,
+        "management": 258.40000000000003,
+        "mortgage": 3243.3496639985137,
+        "tax": 899.1666666666666,
+        "total": 5216.8163306651795,
+        "vacancy": 170.0
+      },
+      "expected": {
+        "annual_cash_flow": -21801.795967982165,
+        "annual_debt_service": 38920.19596798217,
+        "break_even_occupancy": 1.4843577443132883,
+        "cap_rate_spread": -0.018663999999999997,
+        "cash_on_cash": -0.11979008773616574,
+        "dscr": 0.43983334549709135,
+        "egi": 38760.0,
+        "equity_invested": 182000.0,
+        "equity_multiple": 0.641635921285462,
+        "exit_cap": 0.031336,
+        "going_in_cap": 0.026336000000000002,
+        "grm": 15.931372549019608,
+        "gross_potential_rent": 40800.0,
+        "hoa_monthly": 300.0,
+        "levered_irr": -0.08385237297495385,
+        "loan": 487500.0,
+        "ltv": 0.75,
+        "monthly_cash_flow": -1816.8163306651804,
+        "monthly_rent": 3400.0,
+        "net_reversion": 206283.5005782966,
+        "noi": 17118.4,
+        "npv": -166409.97783704422,
+        "oer": 0.5583488132094943,
+        "opex": 21641.6,
+        "price": 650000.0,
+        "sale_price": 692156.5363611149,
+        "terminal_basis": "exit-cap",
+        "total_equity_in": 321496.1845730605,
+        "unlevered_irr": 0.024534609012982322
+      },
+      "input": {
+        "hoa_monthly": 300.0,
+        "monthly_rent": 3400.0,
+        "price": 650000.0
+      },
+      "proforma": [
+        {
+          "debt_service": 38920.19596798217,
+          "egi": 38760.0,
+          "gross_potential_rent": 40800.0,
+          "levered_cash_flow": -21801.795967982165,
+          "noi": 17118.4,
+          "opex": 21641.6,
+          "year": 1
+        },
+        {
+          "debt_service": 38920.19596798217,
+          "egi": 39922.799999999996,
+          "gross_potential_rent": 42024.0,
+          "levered_cash_flow": -21211.043967982172,
+          "noi": 17709.151999999995,
+          "opex": 22213.648,
+          "year": 2
+        },
+        {
+          "debt_service": 38920.19596798217,
+          "egi": 41120.484,
+          "gross_potential_rent": 43284.72,
+          "levered_cash_flow": -20600.63940798217,
+          "noi": 18319.556559999997,
+          "opex": 22800.92744,
+          "year": 3
+        },
+        {
+          "debt_service": 38920.19596798217,
+          "egi": 42354.09852,
+          "gross_potential_rent": 44583.2616,
+          "levered_cash_flow": -19969.94446118216,
+          "noi": 18950.251506800007,
+          "opex": 23403.847013199993,
+          "year": 4
+        },
+        {
+          "debt_service": 38920.19596798217,
+          "egi": 43624.7214756,
+          "gross_potential_rent": 45920.759448000004,
+          "levered_cash_flow": -19318.30095972816,
+          "noi": 19601.895008254007,
+          "opex": 24022.826467345996,
+          "year": 5
+        },
+        {
+          "debt_service": 38920.19596798217,
+          "egi": 44933.463119868,
+          "gross_potential_rent": 47298.38223144,
+          "levered_cash_flow": -18645.029754324292,
+          "noi": 20275.166213657874,
+          "opex": 24658.296906210126,
+          "year": 6
+        },
+        {
+          "debt_service": 38920.19596798217,
+          "egi": 46281.46701346404,
+          "gross_potential_rent": 48717.333698383205,
+          "levered_cash_flow": -17949.430053879394,
+          "noi": 20970.765914102773,
+          "opex": 25310.701099361268,
+          "year": 7
+        }
+      ],
+      "score": {
+        "composite_score": 0.0,
+        "lights": {
+          "break_even_occupancy": "red",
+          "cap_rate_spread": "red",
+          "cash_on_cash": "red",
+          "dscr": "red"
+        },
+        "verdict": "NO-GO"
+      }
+    },
+    {
+      "carry_monthly": {
+        "hoa": 600.0,
+        "insurance": 87.5,
+        "maintenance": 570.0,
+        "management": 570.0,
+        "mortgage": 11975.444913225281,
+        "tax": 3320.0,
+        "total": 17497.94491322528,
+        "vacancy": 375.0
+      },
+      "expected": {
+        "annual_cash_flow": -119975.33895870339,
+        "annual_debt_service": 143705.3389587034,
+        "break_even_occupancy": 2.283059321763371,
+        "cap_rate_spread": -0.0351125,
+        "cash_on_cash": -0.17853473059330863,
+        "dscr": 0.16512956423156477,
+        "egi": 85500.0,
+        "equity_invested": 672000.0,
+        "equity_multiple": 0.21948040256417026,
+        "exit_cap": 0.014887500000000001,
+        "going_in_cap": 0.0098875,
+        "grm": 26.666666666666668,
+        "gross_potential_rent": 90000.0,
+        "hoa_monthly": 600.0,
+        "levered_irr": -0.3685568812626745,
+        "loan": 1800000.0,
+        "ltv": 0.75,
+        "monthly_cash_flow": -9997.944913225283,
+        "monthly_rent": 7500.0,
+        "net_reversion": 327152.05694056884,
+        "noi": 23730.0,
+        "npv": -1091598.4966032223,
+        "oer": 0.7224561403508772,
+        "opex": 61770.0,
+        "price": 2400000.0,
+        "sale_price": 2093410.1172735405,
+        "terminal_basis": "exit-cap",
+        "total_equity_in": 1490575.2546399592,
+        "unlevered_irr": -0.020078075633243153
+      },
+      "input": {
+        "hoa_monthly": 600.0,
+        "monthly_rent": 7500.0,
+        "price": 2400000.0
+      },
+      "proforma": [
+        {
+          "debt_service": 143705.3389587034,
+          "egi": 85500.0,
+          "gross_potential_rent": 90000.0,
+          "levered_cash_flow": -119975.33895870339,
+          "noi": 23730.0,
+          "opex": 61770.0,
+          "year": 1
+        },
+        {
+          "debt_service": 143705.3389587034,
+          "egi": 88065.0,
+          "gross_potential_rent": 92700.0,
+          "levered_cash_flow": -119022.98895870338,
+          "noi": 24682.350000000006,
+          "opex": 63382.649999999994,
+          "year": 2
+        },
+        {
+          "debt_service": 143705.3389587034,
+          "egi": 90706.95,
+          "gross_potential_rent": 95481.0,
+          "levered_cash_flow": -118036.0572087034,
+          "noi": 25669.281750000002,
+          "opex": 65037.668249999995,
+          "year": 3
+        },
+        {
+          "debt_service": 143705.3389587034,
+          "egi": 93428.15849999999,
+          "gross_potential_rent": 98345.43,
+          "levered_cash_flow": -117013.35597495337,
+          "noi": 26691.982983750015,
+          "opex": 66736.17551624998,
+          "year": 4
+        },
+        {
+          "debt_service": 143705.3389587034,
+          "egi": 96231.00325499999,
+          "gross_potential_rent": 101295.7929,
+          "levered_cash_flow": -115953.65813465964,
+          "noi": 27751.680824043753,
+          "opex": 68479.32243095624,
+          "year": 5
+        },
+        {
+          "debt_service": 143705.3389587034,
+          "egi": 99117.93335264998,
+          "gross_potential_rent": 104334.66668699999,
+          "levered_cash_flow": -114855.69590038754,
+          "noi": 28849.64305831585,
+          "opex": 70268.29029433413,
+          "year": 6
+        },
+        {
+          "debt_service": 143705.3389587034,
+          "egi": 102091.47135322951,
+          "gross_potential_rent": 107464.70668761001,
+          "levered_cash_flow": -113718.15950384848,
+          "noi": 29987.179454854908,
+          "opex": 72104.2918983746,
+          "year": 7
+        }
+      ],
+      "score": {
+        "composite_score": 0.0,
+        "lights": {
+          "break_even_occupancy": "red",
+          "cap_rate_spread": "red",
+          "cash_on_cash": "red",
+          "dscr": "red"
+        },
+        "verdict": "NO-GO"
+      }
+    },
+    {
+      "carry_monthly": {
+        "hoa": 280.0,
+        "insurance": 87.5,
+        "maintenance": 197.60000000000002,
+        "management": 197.60000000000002,
+        "mortgage": 2494.8843569219334,
+        "tax": 691.6666666666666,
+        "total": 4079.2510235885998,
+        "vacancy": 130.0
+      },
+      "expected": {
+        "annual_cash_flow": -17751.012283063203,
+        "annual_debt_service": 29938.6122830632,
+        "break_even_occupancy": 1.5189427013802308,
+        "cap_rate_spread": -0.020624800000000002,
+        "cash_on_cash": -0.12679294487902287,
+        "dscr": 0.40708633669352595,
+        "egi": 29640.0,
+        "equity_invested": 140000.0,
+        "equity_multiple": 0.6069403979844796,
+        "exit_cap": 0.029375199999999997,
+        "going_in_cap": 0.024375199999999996,
+        "grm": 16.025641025641026,
+        "gross_potential_rent": 31200.0,
+        "hoa_monthly": 280.0,
+        "levered_irr": -0.0959649717062021,
+        "loan": 375000.0,
+        "ltv": 0.75,
+        "monthly_cash_flow": -1479.2510235886002,
+        "monthly_rent": 2600.0,
+        "net_reversion": 154600.58938784385,
+        "noi": 12187.599999999999,
+        "npv": -135860.96798416867,
+        "oer": 0.5888124156545209,
+        "opex": 17452.4,
+        "price": 500000.0,
+        "sale_price": 528088.7150616599,
+        "terminal_basis": "exit-cap",
+        "total_equity_in": 254721.20475295372,
+        "unlevered_irr": 0.0213969651510868
+      },
+      "input": {
+        "hoa_monthly": 280.0,
+        "monthly_rent": 2600.0,
+        "price": 500000.0
+      },
+      "proforma": [
+        {
+          "debt_service": 29938.6122830632,
+          "egi": 29640.0,
+          "gross_potential_rent": 31200.0,
+          "levered_cash_flow": -17751.012283063203,
+          "noi": 12187.599999999999,
+          "opex": 17452.4,
+          "year": 1
+        },
+        {
+          "debt_service": 29938.6122830632,
+          "egi": 30529.199999999997,
+          "gross_potential_rent": 32136.0,
+          "levered_cash_flow": -17321.834283063203,
+          "noi": 12616.777999999998,
+          "opex": 17912.422,
+          "year": 2
+        },
+        {
+          "debt_service": 29938.6122830632,
+          "egi": 31445.075999999994,
+          "gross_potential_rent": 33100.079999999994,
+          "levered_cash_flow": -16878.19219306321,
+          "noi": 13060.420089999992,
+          "opex": 18384.65591,
+          "year": 3
+        },
+        {
+          "debt_service": 29938.6122830632,
+          "egi": 32388.428279999996,
+          "gross_potential_rent": 34093.0824,
+          "levered_cash_flow": -16419.612371613202,
+          "noi": 13518.999911449999,
+          "opex": 18869.428368549998,
+          "year": 4
+        },
+        {
+          "debt_service": 29938.6122830632,
+          "egi": 33360.0811284,
+          "gross_potential_rent": 35115.874872,
+          "levered_cash_flow": -15945.605975050945,
+          "noi": 13993.006308012256,
+          "opex": 19367.074820387745,
+          "year": 5
+        },
+        {
+          "debt_service": 29938.6122830632,
+          "egi": 34360.883562252006,
+          "gross_potential_rent": 36169.351118160004,
+          "levered_cash_flow": -15455.668476611354,
+          "noi": 14482.943806451847,
+          "opex": 19877.93975580016,
+          "year": 6
+        },
+        {
+          "debt_service": 29938.6122830632,
+          "egi": 35391.71006911956,
+          "gross_potential_rent": 37254.4316517048,
+          "levered_cash_flow": -14949.279170488604,
+          "noi": 14989.333112574597,
+          "opex": 20402.376956544962,
+          "year": 7
+        }
+      ],
+      "score": {
+        "composite_score": 0.0,
+        "lights": {
+          "break_even_occupancy": "red",
+          "cap_rate_spread": "red",
+          "cash_on_cash": "red",
+          "dscr": "red"
+        },
+        "verdict": "NO-GO"
+      }
+    },
+    {
+      "carry_monthly": {
+        "hoa": 0.0,
+        "insurance": 87.5,
+        "maintenance": 395.20000000000005,
+        "management": 395.20000000000005,
+        "mortgage": 5239.257149536061,
+        "tax": 1452.5,
+        "total": 7829.65714953606,
+        "vacancy": 260.0
+      },
+      "expected": {
+        "annual_cash_flow": -31555.885794432732,
+        "annual_debt_service": 62871.08579443273,
+        "break_even_occupancy": 1.455703297987704,
+        "cap_rate_spread": -0.015176000000000002,
+        "cash_on_cash": -0.1073329448790229,
+        "dscr": 0.49808587849731356,
+        "egi": 59280.0,
+        "equity_invested": 294000.0,
+        "equity_multiple": 0.6958184448530318,
+        "exit_cap": 0.034823999999999994,
+        "going_in_cap": 0.029823999999999996,
+        "grm": 16.826923076923077,
+        "gross_potential_rent": 62400.0,
+        "hoa_monthly": 0.0,
+        "levered_irr": -0.06655652681096147,
+        "loan": 787500.0,
+        "ltv": 0.75,
+        "monthly_cash_flow": -2629.657149536061,
+        "monthly_rent": 5200.0,
+        "net_reversion": 342356.781115531,
+        "noi": 31315.199999999997,
+        "npv": -243299.32516056468,
+        "oer": 0.47174089068825914,
+        "opex": 27964.800000000003,
+        "price": 1050000.0,
+        "sale_price": 1127811.3478008253,
+        "terminal_basis": "exit-cap",
+        "total_equity_in": 492020.27288575587,
+        "unlevered_irr": 0.029274333555144638
+      },
+      "input": {
+        "hoa_monthly": 0.0,
+        "monthly_rent": 5200.0,
+        "price": 1050000.0
+      },
+      "proforma": [
+        {
+          "debt_service": 62871.08579443273,
+          "egi": 59280.0,
+          "gross_potential_rent": 62400.0,
+          "levered_cash_flow": -31555.885794432732,
+          "noi": 31315.199999999997,
+          "opex": 27964.800000000003,
+          "year": 1
+        },
+        {
+          "debt_service": 62871.08579443273,
+          "egi": 61058.399999999994,
+          "gross_potential_rent": 64272.0,
+          "levered_cash_flow": -30524.029794432732,
+          "noi": 32347.055999999997,
+          "opex": 28711.343999999997,
+          "year": 2
+        },
+        {
+          "debt_service": 62871.08579443273,
+          "egi": 62890.15199999999,
+          "gross_potential_rent": 66200.15999999999,
+          "levered_cash_flow": -29458.908114432736,
+          "noi": 33412.17767999999,
+          "opex": 29477.974319999998,
+          "year": 3
+        },
+        {
+          "debt_service": 62871.08579443273,
+          "egi": 64776.85655999999,
+          "gross_potential_rent": 68186.1648,
+          "levered_cash_flow": -28359.465034032728,
+          "noi": 34511.6207604,
+          "opex": 30265.235799599992,
+          "year": 4
+        },
+        {
+          "debt_service": 62871.08579443273,
+          "egi": 66720.1622568,
+          "gross_potential_rent": 70231.749744,
+          "levered_cash_flow": -27224.611717470718,
+          "noi": 35646.47407696201,
+          "opex": 31073.68817983799,
+          "year": 5
+        },
+        {
+          "debt_service": 62871.08579443273,
+          "egi": 68721.76712450401,
+          "gross_potential_rent": 72338.70223632001,
+          "levered_cash_flow": -26053.2251840681,
+          "noi": 36817.86061036463,
+          "opex": 31903.90651413938,
+          "year": 6
+        },
+        {
+          "debt_service": 62871.08579443273,
+          "egi": 70783.42013823912,
+          "gross_potential_rent": 74508.8633034096,
+          "levered_cash_flow": -24844.14724688608,
+          "noi": 38026.93854754665,
+          "opex": 32756.48159069247,
+          "year": 7
+        }
+      ],
+      "score": {
+        "composite_score": 0.0,
+        "lights": {
+          "break_even_occupancy": "red",
+          "cap_rate_spread": "red",
+          "cash_on_cash": "red",
+          "dscr": "red"
+        },
+        "verdict": "NO-GO"
+      }
+    },
+    {
+      "carry_monthly": {
+        "hoa": 200.0,
+        "insurance": 87.5,
+        "maintenance": 220.4,
+        "management": 220.4,
+        "mortgage": 1746.4190498453538,
+        "tax": 484.1666666666667,
+        "total": 3103.8857165120207,
+        "vacancy": 145.0
+      },
+      "expected": {
+        "annual_cash_flow": -2446.628598144245,
+        "annual_debt_service": 20957.028598144247,
+        "break_even_occupancy": 1.0203054194869037,
+        "cap_rate_spread": 0.007886857142857147,
+        "cash_on_cash": -0.0249655979402474,
+        "dscr": 0.8832549859496353,
+        "egi": 33060.0,
+        "equity_invested": 98000.0,
+        "equity_multiple": 1.3344039358524686,
+        "exit_cap": 0.05788685714285714,
+        "going_in_cap": 0.052886857142857145,
+        "grm": 10.057471264367816,
+        "gross_potential_rent": 34800.0,
+        "hoa_monthly": 200.0,
+        "levered_irr": 0.042808588963008765,
+        "loan": 262500.0,
+        "ltv": 0.75,
+        "monthly_cash_flow": -203.88571651202042,
+        "monthly_rent": 2900.0,
+        "net_reversion": 136610.0173070113,
+        "noi": 18510.4,
+        "npv": -22151.927290964857,
+        "oer": 0.44009679370840893,
+        "opex": 14549.599999999999,
+        "price": 350000.0,
+        "sale_price": 399863.8077086094,
+        "terminal_basis": "exit-cap",
+        "total_equity_in": 104099.413839277,
+        "unlevered_irr": 0.061260449339473055
+      },
+      "input": {
+        "hoa_monthly": 200.0,
+        "monthly_rent": 2900.0,
+        "price": 350000.0
+      },
+      "proforma": [
+        {
+          "debt_service": 20957.028598144247,
+          "egi": 33060.0,
+          "gross_potential_rent": 34800.0,
+          "levered_cash_flow": -2446.628598144245,
+          "noi": 18510.4,
+          "opex": 14549.599999999999,
+          "year": 1
+        },
+        {
+          "debt_service": 20957.028598144247,
+          "egi": 34051.799999999996,
+          "gross_potential_rent": 35844.0,
+          "levered_cash_flow": -1845.0165981442515,
+          "noi": 19112.011999999995,
+          "opex": 14939.788,
+          "year": 2
+        },
+        {
+          "debt_service": 20957.028598144247,
+          "egi": 35073.35399999999,
+          "gross_potential_rent": 36919.31999999999,
+          "levered_cash_flow": -1224.198738144256,
+          "noi": 19732.82985999999,
+          "opex": 15340.52414,
+          "year": 3
+        },
+        {
+          "debt_service": 20957.028598144247,
+          "egi": 36125.55462,
+          "gross_potential_rent": 38026.899600000004,
+          "levered_cash_flow": -583.5699048442439,
+          "noi": 20373.458693300003,
+          "opex": 15752.095926699998,
+          "year": 4
+        },
+        {
+          "debt_service": 20957.028598144247,
+          "egi": 37209.3212586,
+          "gross_potential_rent": 39167.706588,
+          "levered_cash_flow": 77.49389189225985,
+          "noi": 21034.522490036506,
+          "opex": 16174.798768563494,
+          "year": 5
+        },
+        {
+          "debt_service": 20957.028598144247,
+          "egi": 38325.600896357995,
+          "gross_potential_rent": 40342.73778564,
+          "levered_cash_flow": 759.6361034292859,
+          "noi": 21716.664701573533,
+          "opex": 16608.936194784463,
+          "year": 6
+        },
+        {
+          "debt_service": 20957.028598144247,
+          "egi": 39475.368923248745,
+          "gross_potential_rent": 41553.019919209204,
+          "levered_cash_flow": 1463.5202447333395,
+          "noi": 22420.548842877586,
+          "opex": 17054.82008037116,
+          "year": 7
+        }
+      ],
+      "score": {
+        "composite_score": 0.0,
+        "lights": {
+          "break_even_occupancy": "red",
+          "cap_rate_spread": "red",
+          "cash_on_cash": "red",
+          "dscr": "red"
+        },
+        "verdict": "NO-GO"
+      }
+    },
+    {
+      "carry_monthly": {
+        "hoa": 900.0,
+        "insurance": 87.5,
+        "maintenance": 608.0,
+        "management": 608.0,
+        "mortgage": 15967.259884300376,
+        "tax": 4426.666666666667,
+        "total": 22997.426550967044,
+        "vacancy": 400.0
+      },
+      "expected": {
+        "annual_cash_flow": -179969.1186116045,
+        "annual_debt_service": 191607.1186116045,
+        "break_even_occupancy": 2.8246783188708804,
+        "cap_rate_spread": -0.041363125,
+        "cash_on_cash": -0.2008583913075943,
+        "dscr": 0.060738870686692516,
+        "egi": 91200.0,
+        "equity_invested": 896000.0,
+        "equity_multiple": 0.0,
+        "exit_cap": 0.008636875,
+        "going_in_cap": 0.003636875,
+        "grm": 33.333333333333336,
+        "gross_potential_rent": 96000.0,
+        "hoa_monthly": 900.0,
+        "levered_irr": null,
+        "loan": 2400000.0,
+        "ltv": 0.75,
+        "monthly_cash_flow": -14997.426550967042,
+        "monthly_rent": 8000.0,
+        "net_reversion": -338500.19587812945,
+        "noi": 11638.0,
+        "npv": -2020394.856939764,
+        "oer": 0.872390350877193,
+        "opex": 79562.0,
+        "price": 3200000.0,
+        "sale_price": 1967061.4275006552,
+        "terminal_basis": "exit-cap",
+        "total_equity_in": 2140600.464165235,
+        "unlevered_irr": -0.0737407902044992
+      },
+      "input": {
+        "hoa_monthly": 900.0,
+        "monthly_rent": 8000.0,
+        "price": 3200000.0
+      },
+      "proforma": [
+        {
+          "debt_service": 191607.1186116045,
+          "egi": 91200.0,
+          "gross_potential_rent": 96000.0,
+          "levered_cash_flow": -179969.1186116045,
+          "noi": 11638.0,
+          "opex": 79562.0,
+          "year": 1
+        },
+        {
+          "debt_service": 191607.1186116045,
+          "egi": 93936.0,
+          "gross_potential_rent": 98880.0,
+          "levered_cash_flow": -179295.1286116045,
+          "noi": 12311.990000000005,
+          "opex": 81624.01,
+          "year": 2
+        },
+        {
+          "debt_service": 191607.1186116045,
+          "egi": 96754.07999999999,
+          "gross_potential_rent": 101846.4,
+          "levered_cash_flow": -178592.7976616045,
+          "noi": 13014.320949999994,
+          "opex": 83739.75905,
+          "year": 3
+        },
+        {
+          "debt_service": 191607.1186116045,
+          "egi": 99656.70240000001,
+          "gross_potential_rent": 104901.79200000002,
+          "levered_cash_flow": -177861.07250185448,
+          "noi": 13746.046109750023,
+          "opex": 85910.65629024999,
+          "year": 4
+        },
+        {
+          "debt_service": 191607.1186116045,
+          "egi": 102646.40347199999,
+          "gross_potential_rent": 108048.84576,
+          "levered_cash_flow": -177098.86319903075,
+          "noi": 14508.255412573766,
+          "opex": 88138.14805942622,
+          "year": 5
+        },
+        {
+          "debt_service": 191607.1186116045,
+          "egi": 105725.79557616,
+          "gross_potential_rent": 111290.31113280001,
+          "levered_cash_flow": -176305.04191913398,
+          "noi": 15302.076692470539,
+          "opex": 90423.71888368946,
+          "year": 6
+        },
+        {
+          "debt_service": 191607.1186116045,
+          "egi": 108897.56944344481,
+          "gross_potential_rent": 114629.02046678402,
+          "levered_cash_flow": -175478.4416604023,
+          "noi": 16128.676951202186,
+          "opex": 92768.89249224262,
+          "year": 7
+        }
+      ],
+      "score": {
+        "composite_score": 0.0,
+        "lights": {
+          "break_even_occupancy": "red",
+          "cap_rate_spread": "red",
+          "cash_on_cash": "red",
+          "dscr": "red"
+        },
+        "verdict": "NO-GO"
+      }
+    },
+    {
+      "carry_monthly": {
+        "hoa": 1500.0,
+        "insurance": 87.5,
+        "maintenance": 106.39999999999999,
+        "management": 106.39999999999999,
+        "mortgage": 9979.537427687734,
+        "tax": 2766.6666666666665,
+        "total": 14616.504094354399,
+        "vacancy": 70.0
+      },
+      "expected": {
+        "annual_cash_flow": -158598.0491322528,
+        "annual_debt_service": 119754.4491322528,
+        "break_even_occupancy": 10.390360067396001,
+        "cap_rate_spread": -0.0644218,
+        "cash_on_cash": -0.28321080202188004,
+        "dscr": -0.3243603914632218,
+        "egi": 15960.0,
+        "equity_invested": 560000.0,
+        "equity_multiple": 0.5133521074948134,
+        "exit_cap": -0.014421800000000002,
+        "going_in_cap": -0.019421800000000003,
+        "grm": 119.04761904761905,
+        "gross_potential_rent": 16800.0,
+        "hoa_monthly": 1500.0,
+        "levered_irr": -0.16356133441105192,
+        "loan": 1500000.0,
+        "ltv": 0.75,
+        "monthly_cash_flow": -13216.5040943544,
+        "monthly_rent": 1400.0,
+        "net_reversion": 867518.0058157733,
+        "noi": -38843.600000000006,
+        "npv": -892676.0749262086,
+        "oer": 3.4338095238095243,
+        "opex": 54803.600000000006,
+        "price": 2000000.0,
+        "sale_price": 2377371.5073364247,
+        "terminal_basis": "appreciation",
+        "total_equity_in": 1689908.3361112685,
+        "unlevered_irr": -0.00783352399705095
+      },
+      "input": {
+        "hoa_monthly": 1500.0,
+        "monthly_rent": 1400.0,
+        "price": 2000000.0
+      },
+      "proforma": [
+        {
+          "debt_service": 119754.4491322528,
+          "egi": 15960.0,
+          "gross_potential_rent": 16800.0,
+          "levered_cash_flow": -158598.0491322528,
+          "noi": -38843.600000000006,
+          "opex": 54803.600000000006,
+          "year": 1
+        },
+        {
+          "debt_service": 119754.4491322528,
+          "egi": 16438.8,
+          "gross_potential_rent": 17304.0,
+          "levered_cash_flow": -159502.1071322528,
+          "noi": -39747.657999999996,
+          "opex": 56186.458,
+          "year": 2
+        },
+        {
+          "debt_service": 119754.4491322528,
+          "egi": 16931.964,
+          "gross_potential_rent": 17823.12,
+          "levered_cash_flow": -160426.7556222528,
+          "noi": -40672.306489999995,
+          "opex": 57604.270489999995,
+          "year": 3
+        },
+        {
+          "debt_service": 119754.4491322528,
+          "egi": 17439.92292,
+          "gross_potential_rent": 18357.8136,
+          "levered_cash_flow": -161372.4490357028,
+          "noi": -41617.99990344999,
+          "opex": 59057.92282344999,
+          "year": 4
+        },
+        {
+          "debt_service": 119754.4491322528,
+          "egi": 17963.120607600005,
+          "gross_potential_rent": 18908.548008000005,
+          "levered_cash_flow": -162339.65135702502,
+          "noi": -42585.20222477222,
+          "opex": 60548.32283237223,
+          "year": 5
+        },
+        {
+          "debt_service": 119754.4491322528,
+          "egi": 18502.014225828,
+          "gross_potential_rent": 19475.80444824,
+          "levered_cash_flow": -163328.83630609245,
+          "noi": -43574.38717383963,
+          "opex": 62076.40139966762,
+          "year": 6
+        },
+        {
+          "debt_service": 119754.4491322528,
+          "egi": 19057.07465260284,
+          "gross_potential_rent": 20060.0785816872,
+          "levered_cash_flow": -164340.48752568994,
+          "noi": -44586.03839343712,
+          "opex": 63643.11304603996,
+          "year": 7
+        }
+      ],
+      "score": {
+        "composite_score": 0.0,
+        "lights": {
+          "break_even_occupancy": "red",
+          "cap_rate_spread": "red",
+          "cash_on_cash": "red",
+          "dscr": "red"
+        },
+        "verdict": "NO-GO"
+      }
+    }
+  ],
+  "scoring": {
+    "break_even_occupancy": {
+      "amber_above": 0.85,
+      "red_above": 0.9
+    },
+    "cap_rate_spread_over_treasury": {
+      "amber_below": 0.02,
+      "red_below": 0.01
+    },
+    "cash_on_cash": {
+      "amber_below": 0.08,
+      "red_below": 0.04
+    },
+    "composite": {
+      "amber_min": 0.5,
+      "green_min": 0.75,
+      "light_scores": {
+        "amber": 0.5,
+        "green": 1.0,
+        "red": 0.0
+      },
+      "weights": {
+        "break_even_occupancy": 0.2,
+        "cap_rate_spread": 0.25,
+        "cash_on_cash": 0.3,
+        "dscr": 0.25
+      }
+    },
+    "dscr": {
+      "amber_below": 1.25,
+      "red_below": 1.0
+    },
+    "rules_of_thumb": {
+      "fifty_percent_expense_rule": 0.5,
+      "one_percent_rule": 0.01
+    }
+  }
+}

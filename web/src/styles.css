@@ -10,6 +10,12 @@
   --radius-lg: 6px;
   --radius-xl: 10px;
 
+  /* Spacing base = 4px. The design system snaps to an 8pt grid: prefer even
+     Tailwind steps (2=8px, 4=16px, 6=24px, 8=32px, 12=48px, 16=64px). The 4px
+     half-step is allowed sparingly; avoid 1.5/2.5 (6px/10px), which fall off
+     the grid. Explicit here to document intent (matches the Tailwind default). */
+  --spacing: 0.25rem;
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-paper: var(--paper);
@@ -37,6 +43,9 @@
   --color-watch: var(--watch);
   --color-nogo: var(--nogo);
   --color-gold: var(--gold);
+  --color-go-strong: var(--go-strong);
+  --color-watch-strong: var(--watch-strong);
+  --color-nogo-strong: var(--nogo-strong);
 
   --font-display: "Instrument Serif", "Iowan Old Style", Georgia, serif;
   --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
@@ -76,6 +85,15 @@
   --watch: oklch(0.72 0.15 75);
   --nogo: oklch(0.55 0.2 22);
   --gold: oklch(0.72 0.13 80);
+
+  /* AA-safe text variants of the verdict colours (WCAG 2.1 SC 1.4.3, >= 4.5:1
+     against card / paper / badge-tint / hover-row). Computed by
+     scripts/wcag_contrast_audit.py: hue fixed, closest in-gamut (L, C). The
+     decorative --go/--watch/--nogo above keep their vivid value for dots, 10%
+     tints and borders, where the 3:1 graphic bar (SC 1.4.11) suffices. */
+  --go-strong: oklch(0.506 0.1225 155); /* 4.60:1 */
+  --watch-strong: oklch(0.528 0.11 75); /* 4.64:1 */
+  --nogo-strong: oklch(0.54 0.2 22); /* 4.61:1 */
 }
 
 .dark {
@@ -99,35 +117,59 @@
   --accent-foreground: var(--ink);
   --border: var(--rule);
   --input: var(--rule);
+
+  /* Verdict text variants re-tuned for the dark surface (see audit script).
+     Decorative --go/--watch/--nogo inherit their light brand value (used as
+     vivid dots/tints on the dark card). */
+  --go-strong: oklch(0.608 0.13 155); /* 4.63:1 */
+  --watch-strong: oklch(0.72 0.15 75); /* 6.20:1 (brand value) */
+  --nogo-strong: oklch(0.642 0.1925 22); /* 4.60:1 */
 }
 
 @layer base {
   * {
     border-color: var(--color-border);
   }
-  html, body {
+  html,
+  body {
     background-color: var(--color-background);
     color: var(--color-foreground);
     font-family: var(--font-sans);
     font-feature-settings: "ss01", "cv11";
+    /* Tabular figures app-wide so numeric columns and live-updating stats align;
+       a no-op on the Instrument Serif display face, which lacks tnum. */
+    font-variant-numeric: tabular-nums;
     -webkit-font-smoothing: antialiased;
   }
-  h1, h2, h3, .font-display {
+  h1,
+  h2,
+  h3,
+  .font-display {
     font-family: var(--font-display);
     font-weight: 400;
     letter-spacing: -0.01em;
   }
-  .font-mono, code, kbd {
+  .font-mono,
+  code,
+  kbd {
     font-family: var(--font-mono);
+    /* Defensive only: redundant with the body `tabular-nums` above and inert on
+       the monospaced IBM Plex Mono primary (figures already fixed-width);
+       retained for any proportional ui-monospace fallback. */
     font-feature-settings: "tnum";
   }
-  .tabular { font-variant-numeric: tabular-nums; }
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
 }
 
-@utility rule-t { border-top: 1px solid var(--color-rule); }
-@utility rule-b { border-bottom: 1px solid var(--color-rule); }
+@utility rule-t {
+  border-top: 1px solid var(--color-rule);
+}
+@utility rule-b {
+  border-bottom: 1px solid var(--color-rule);
+}
 @utility paper-grain {
-  background-image:
-    radial-gradient(oklch(0 0 0 / 0.025) 1px, transparent 1px);
+  background-image: radial-gradient(oklch(0 0 0 / 0.025) 1px, transparent 1px);
   background-size: 3px 3px;
 }

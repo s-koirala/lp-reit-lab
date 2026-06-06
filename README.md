@@ -100,6 +100,26 @@ quarto render reports/property_memo.qmd -P property_id:SYN-0001 --to html
 > for methodology, data sources, and the Fair Housing compliance boundary
 > (market-demand analysis only — never tenant screening/steering).
 
+## Running the web front-end
+
+```bash
+cd web
+bun install                 # first time (respects the 24h supply-chain guard in bunfig.toml)
+bun run dev                 # → http://localhost:5173/
+bun run test                # Vitest: TS<->Python engine parity
+bun run lint                # eslint + prettier
+bun run build               # SSR build → dist/client + dist/server
+# Cloudflare Pages deploy bundle:
+NITRO_PRESET=cloudflare-module bun run build
+```
+
+The SPA renders precomputed **synthetic** artifacts behind a single data-source
+boundary ([web/src/lib/data/source.ts](web/src/lib/data/source.ts)); the cash-flow
+math is a parity-gated TypeScript mirror of the Python engine
+([web/src/lib/engine/](web/src/lib/engine/)), and the forecast panel currently shows a
+clearly-labelled illustrative sample (the real compiler is deferred — see
+[the forecast methodology memo](docs/methodology/methodology_forecast-artifact_2026-06-06.md)).
+
 ## Reproducibility
 
 This project follows the 13-field ReproLog contract documented at

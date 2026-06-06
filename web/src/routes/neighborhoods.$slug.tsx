@@ -5,7 +5,17 @@ import { getNeighborhood, NEIGHBORHOODS } from "@/lib/data/neighborhoods";
 import { PROPERTIES, computeMetrics } from "@/lib/data/properties";
 import { PRICE_INDEX, RENT_INDEX, LIQUIDITY } from "@/lib/data/market";
 import { fmtMoney, fmtPct } from "@/lib/format";
-import { Area, AreaChart, CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+import {
+  Area,
+  AreaChart,
+  CartesianGrid,
+  Line,
+  LineChart,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from "recharts";
 
 export const Route = createFileRoute("/neighborhoods/$slug")({
   loader: ({ params }) => {
@@ -14,10 +24,20 @@ export const Route = createFileRoute("/neighborhoods/$slug")({
     return { n };
   },
   head: ({ loaderData }) => ({
-    meta: loaderData ? [{ title: `${loaderData.n.name} — Submarket Profile` }] : [{ title: "Submarket" }],
+    meta: loaderData
+      ? [{ title: `${loaderData.n.name} — Submarket Profile` }]
+      : [{ title: "Submarket" }],
   }),
-  errorComponent: ({ error }) => <AppShell><p className="py-20 text-center">Could not load: {error.message}</p></AppShell>,
-  notFoundComponent: () => <AppShell><p className="py-20 text-center">Submarket not found.</p></AppShell>,
+  errorComponent: ({ error }) => (
+    <AppShell>
+      <p className="py-20 text-center">Could not load: {error.message}</p>
+    </AppShell>
+  ),
+  notFoundComponent: () => (
+    <AppShell>
+      <p className="py-20 text-center">Submarket not found.</p>
+    </AppShell>
+  ),
   component: NeighborhoodPage,
 });
 
@@ -34,7 +54,9 @@ function NeighborhoodPage() {
   return (
     <AppShell>
       <div className="mb-3 text-xs font-mono uppercase tracking-[0.22em] text-muted-foreground flex gap-3 items-center">
-        <Link to="/neighborhoods" className="hover:text-foreground">Submarkets</Link>
+        <Link to="/neighborhoods" className="hover:text-foreground">
+          Submarkets
+        </Link>
         <span>/</span>
         <span className="text-foreground">{n.name}</span>
       </div>
@@ -55,7 +77,9 @@ function NeighborhoodPage() {
       <section className="grid grid-cols-12 gap-8 mb-12">
         <div className="col-span-12 lg:col-span-8">
           <h2 className="text-2xl mb-1">Repeat-sales price index</h2>
-          <p className="text-sm text-muted-foreground mb-4">Jan 2015 = 100. Band reflects ±1.8% measurement noise.</p>
+          <p className="text-sm text-muted-foreground mb-4">
+            Jan 2015 = 100. Band reflects ±1.8% measurement noise.
+          </p>
           <div className="bg-card rule-t rule-b p-4" style={{ height: 280 }}>
             <ResponsiveContainer>
               <AreaChart data={price} margin={{ left: 0, right: 10, top: 10 }}>
@@ -66,43 +90,108 @@ function NeighborhoodPage() {
                   </linearGradient>
                 </defs>
                 <CartesianGrid stroke="var(--rule)" vertical={false} />
-                <XAxis dataKey="date" tick={{ fontSize: 10, fontFamily: "IBM Plex Mono" }} stroke="currentColor"
-                  tickFormatter={(v: string) => v.slice(0, 4)} interval={11} />
-                <YAxis tick={{ fontSize: 10, fontFamily: "IBM Plex Mono" }} stroke="currentColor" domain={["dataMin - 5", "dataMax + 5"]} />
-                <Tooltip contentStyle={{ background: "var(--paper)", border: "1px solid var(--rule)", fontSize: 12 }} />
+                <XAxis
+                  dataKey="date"
+                  tick={{ fontSize: 10, fontFamily: "IBM Plex Mono" }}
+                  stroke="currentColor"
+                  tickFormatter={(v: string) => v.slice(0, 4)}
+                  interval={11}
+                />
+                <YAxis
+                  tick={{ fontSize: 10, fontFamily: "IBM Plex Mono" }}
+                  stroke="currentColor"
+                  domain={["dataMin - 5", "dataMax + 5"]}
+                />
+                <Tooltip
+                  contentStyle={{
+                    background: "var(--paper)",
+                    border: "1px solid var(--rule)",
+                    fontSize: 12,
+                  }}
+                />
                 <Area dataKey="upper" stroke="none" fill="url(#pi)" />
                 <Area dataKey="lower" stroke="none" fill="var(--paper)" />
-                <Line dataKey="value" stroke="oklch(0.18 0.025 250)" strokeWidth={2} dot={false} type="monotone" />
+                <Line
+                  dataKey="value"
+                  stroke="var(--foreground)"
+                  strokeWidth={2}
+                  dot={false}
+                  type="monotone"
+                />
               </AreaChart>
             </ResponsiveContainer>
           </div>
         </div>
         <div className="col-span-12 lg:col-span-4">
           <h2 className="text-2xl mb-1">Market liquidity</h2>
-          <p className="text-sm text-muted-foreground mb-4">Median days-on-market, last 36 months.</p>
+          <p className="text-sm text-muted-foreground mb-4">
+            Median days-on-market, last 36 months.
+          </p>
           <div className="bg-card rule-t rule-b p-4" style={{ height: 280 }}>
             <ResponsiveContainer>
               <LineChart data={liq}>
                 <CartesianGrid stroke="var(--rule)" vertical={false} />
-                <XAxis dataKey="date" tick={{ fontSize: 10, fontFamily: "IBM Plex Mono" }} stroke="currentColor" tickFormatter={(v: string) => v.slice(2, 7)} interval={5} />
+                <XAxis
+                  dataKey="date"
+                  tick={{ fontSize: 10, fontFamily: "IBM Plex Mono" }}
+                  stroke="currentColor"
+                  tickFormatter={(v: string) => v.slice(2, 7)}
+                  interval={5}
+                />
                 <YAxis tick={{ fontSize: 10, fontFamily: "IBM Plex Mono" }} stroke="currentColor" />
-                <Tooltip contentStyle={{ background: "var(--paper)", border: "1px solid var(--rule)", fontSize: 12 }} />
-                <Line dataKey="dom" stroke="oklch(0.55 0.2 22)" strokeWidth={2} dot={false} type="monotone" />
+                <Tooltip
+                  contentStyle={{
+                    background: "var(--paper)",
+                    border: "1px solid var(--rule)",
+                    fontSize: 12,
+                  }}
+                />
+                <Line
+                  dataKey="dom"
+                  stroke="oklch(0.55 0.2 22)"
+                  strokeWidth={2}
+                  dot={false}
+                  type="monotone"
+                />
               </LineChart>
             </ResponsiveContainer>
           </div>
         </div>
         <div className="col-span-12">
           <h2 className="text-2xl mb-1">Rent index</h2>
-          <p className="text-sm text-muted-foreground mb-4">3BR equivalent rents, Jan 2015 = 100.</p>
+          <p className="text-sm text-muted-foreground mb-4">
+            3BR equivalent rents, Jan 2015 = 100.
+          </p>
           <div className="bg-card rule-t rule-b p-4" style={{ height: 220 }}>
             <ResponsiveContainer>
               <LineChart data={rent}>
                 <CartesianGrid stroke="var(--rule)" vertical={false} />
-                <XAxis dataKey="date" tick={{ fontSize: 10, fontFamily: "IBM Plex Mono" }} stroke="currentColor" tickFormatter={(v: string) => v.slice(0, 4)} interval={11} />
-                <YAxis tick={{ fontSize: 10, fontFamily: "IBM Plex Mono" }} stroke="currentColor" domain={["dataMin - 5", "dataMax + 5"]} />
-                <Tooltip contentStyle={{ background: "var(--paper)", border: "1px solid var(--rule)", fontSize: 12 }} />
-                <Line dataKey="value" stroke="oklch(0.52 0.13 155)" strokeWidth={2} dot={false} type="monotone" />
+                <XAxis
+                  dataKey="date"
+                  tick={{ fontSize: 10, fontFamily: "IBM Plex Mono" }}
+                  stroke="currentColor"
+                  tickFormatter={(v: string) => v.slice(0, 4)}
+                  interval={11}
+                />
+                <YAxis
+                  tick={{ fontSize: 10, fontFamily: "IBM Plex Mono" }}
+                  stroke="currentColor"
+                  domain={["dataMin - 5", "dataMax + 5"]}
+                />
+                <Tooltip
+                  contentStyle={{
+                    background: "var(--paper)",
+                    border: "1px solid var(--rule)",
+                    fontSize: 12,
+                  }}
+                />
+                <Line
+                  dataKey="value"
+                  stroke="oklch(0.52 0.13 155)"
+                  strokeWidth={2}
+                  dot={false}
+                  type="monotone"
+                />
               </LineChart>
             </ResponsiveContainer>
           </div>
@@ -126,12 +215,28 @@ function NeighborhoodPage() {
             <tbody>
               {listings.map(({ p, m }) => (
                 <tr key={p.id} className="rule-b hover:bg-secondary/60">
-                  <td className="px-3 py-3"><VerdictBadge verdict={m.verdict} size="sm" /></td>
-                  <td className="px-3 py-3"><Link to="/property/$id" params={{ id: p.id }} className="hover:underline underline-offset-4">{p.address}</Link></td>
-                  <td className="px-3 py-3 text-right font-mono">{p.beds}/{p.baths}</td>
-                  <td className="px-3 py-3 text-right font-mono">{fmtMoney(p.listPrice, { compact: true })}</td>
+                  <td className="px-3 py-3">
+                    <VerdictBadge verdict={m.verdict} size="sm" />
+                  </td>
+                  <td className="px-3 py-3">
+                    <Link
+                      to="/property/$id"
+                      params={{ id: p.id }}
+                      className="hover:underline underline-offset-4"
+                    >
+                      {p.address}
+                    </Link>
+                  </td>
+                  <td className="px-3 py-3 text-right font-mono">
+                    {p.beds}/{p.baths}
+                  </td>
+                  <td className="px-3 py-3 text-right font-mono">
+                    {fmtMoney(p.listPrice, { compact: true })}
+                  </td>
                   <td className="px-3 py-3 text-right font-mono">{fmtPct(m.netRentYield, 2)}</td>
-                  <td className="px-3 py-3 text-right font-mono">{fmtPct(p.expectedAppreciation, 1)}</td>
+                  <td className="px-3 py-3 text-right font-mono">
+                    {fmtPct(p.expectedAppreciation, 1)}
+                  </td>
                 </tr>
               ))}
             </tbody>
@@ -140,7 +245,12 @@ function NeighborhoodPage() {
       </section>
 
       <div className="rule-t pt-6 text-xs text-muted-foreground flex justify-between">
-        <Link to="/neighborhoods" className="font-mono uppercase tracking-wider hover:text-foreground">← All submarkets</Link>
+        <Link
+          to="/neighborhoods"
+          className="font-mono uppercase tracking-wider hover:text-foreground"
+        >
+          ← All submarkets
+        </Link>
         <span>Context: {NEIGHBORHOODS.length} North Side submarkets indexed.</span>
       </div>
     </AppShell>
@@ -150,7 +260,9 @@ function NeighborhoodPage() {
 function Cell({ label, value }: { label: string; value: string }) {
   return (
     <div className="bg-card p-4">
-      <div className="text-[9px] font-mono uppercase tracking-[0.22em] text-muted-foreground">{label}</div>
+      <div className="text-[9px] font-mono uppercase tracking-[0.22em] text-muted-foreground">
+        {label}
+      </div>
       <div className="font-mono text-lg mt-1">{value}</div>
     </div>
   );

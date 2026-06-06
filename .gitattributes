@@ -15,6 +15,17 @@
 *.sh text eol=lf
 *.cfg text eol=lf
 
+# Web front-end source (added P1): keep LF despite Windows core.autocrlf, so
+# Prettier (endOfLine: lf) is satisfied on every checkout.
+*.ts text eol=lf
+*.tsx text eol=lf
+*.js text eol=lf
+*.jsx text eol=lf
+*.cjs text eol=lf
+*.mjs text eol=lf
+*.css text eol=lf
+*.html text eol=lf
+
 # Notebook stripping via nbstripout (pre-commit hook runs on save)
 *.ipynb filter=nbstripout
 *.ipynb diff=ipynb

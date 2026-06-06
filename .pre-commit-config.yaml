@@ -11,6 +11,8 @@
 ##     CITATION.cff against CFF v1.2.0 minimum schema
 ##   - data-manifest-check (~/.claude/scripts/build_data_manifest.py --check)
 ##     — exits non-zero if data/ files have drifted since last manifest update
+##   - wcag-contrast (scripts/wcag_contrast_audit.py --assert) — exits non-zero
+##     if any web/ design-system text token falls below WCAG 2.1 AA (4.5:1)
 
 repos:
   - repo: https://github.com/astral-sh/ruff-pre-commit
@@ -55,3 +57,20 @@ repos:
         pass_filenames: false
         always_run: true
         stages: [pre-push]  # pre-push only; rebuilding manifest on every commit is costly
+
+      - id: wcag-contrast
+        name: WCAG AA contrast guard (web design tokens)
+        entry: python scripts/wcag_contrast_audit.py --assert
+        language: system
+        files: ^web/src/styles\.css$  # runs only when the token source changes
+        pass_filenames: false
+
+      - id: web-engine-fixtures
+        name: Web engine fixtures current (TS mirror == Python engine)
+        entry: python scripts/export_web_engine_fixtures.py --check
+        language: system
+        # Fires when the canonical assumptions/scoring, the Python engine, the
+        # exporter, or the generated TS fixtures change — the generated config +
+        # golden vectors must be re-exported in lockstep.
+        files: ^(config/(assumptions|scoring)\.yaml|src/lp_reit_lab/(finance/.*\.py|scoring\.py|config\.py)|scripts/export_web_engine_fixtures\.py|web/src/lib/engine/(config\.generated\.json|__fixtures__/golden_vectors\.json))$
+        pass_filenames: false

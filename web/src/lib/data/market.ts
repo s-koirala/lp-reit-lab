@@ -27,17 +27,20 @@ function buildIndex(slug: string, cagr: number, vol: number, seed: number) {
 }
 
 export const PRICE_INDEX = NEIGHBORHOODS.map((n, i) =>
-  buildIndex(n.slug, n.appreciation5y, 0.006, 1000 + i * 137)
+  buildIndex(n.slug, n.appreciation5y, 0.006, 1000 + i * 137),
 );
 
 export const RENT_INDEX = NEIGHBORHOODS.map((n, i) =>
-  buildIndex(n.slug, n.appreciation5y * 0.7 + 0.012, 0.004, 2000 + i * 191)
+  buildIndex(n.slug, n.appreciation5y * 0.7 + 0.012, 0.004, 2000 + i * 191),
 );
 
 // market liquidity — monthly DOM averages, last 36 months
 export const LIQUIDITY = NEIGHBORHOODS.map((n, i) => {
   let r = 333 + i * 17;
-  const noise = () => { r = (r * 9301 + 49297) % 233280; return r / 233280 - 0.5; };
+  const noise = () => {
+    r = (r * 9301 + 49297) % 233280;
+    return r / 233280 - 0.5;
+  };
   return {
     slug: n.slug,
     series: Array.from({ length: 36 }, (_, k) => {

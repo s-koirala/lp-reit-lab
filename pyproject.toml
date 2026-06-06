@@ -60,6 +60,10 @@ ignore = ["PLR0913"]
 [tool.ruff.lint.per-file-ignores]
 # Test files compare against literal expected values (not magic constants).
 "tests/**" = ["PLR2004"]
+# Colour-science module: keep the canonical OKLCH axis names (L, C, H) and the
+# LMS cone-response names (l, m, s) verbatim from the primary sources (Ottosson
+# 2020; CSS Color 4) so the transform verifies line-by-line against them.
+"scripts/wcag_contrast_audit.py" = ["N803", "N806", "E741"]
 
 [tool.pytest.ini_options]
 pythonpath = [".", "src"]
