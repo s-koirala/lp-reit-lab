@@ -1,0 +1,162 @@
+# =============================================================================
+# Multiple-testing family register — lp-reit-lab
+# =============================================================================
+# PRE-REGISTERED FAMILY LEDGER. Schema per
+# ~/.claude/skills/multipletest-gate/SKILL.md and the canonical template
+# ~/.claude/templates/multipletest_family_TEMPLATE.yaml, plus rules/quant-project.md
+# ("Multiple testing across strategies/hypotheses").
+#
+# WHY THIS FILE EXISTS
+# The family register is the auditable ledger of every test ever added to this
+# project's pre-registered hypothesis family. Without it, family scope drifts
+# and every corrected threshold becomes meaningless (SKILL.md "Why family-wise
+# gating").
+#
+# FROZEN-AT-REGISTRATION SCOPE — CRITICAL LIMITATION
+# The family is pre-registered. Its membership is fixed at registration time.
+# Adding a hypothesis AFTER the fact INVALIDATES family-wise correction: the
+# denominator m used by BH-FDR and Holm is only valid if it was fixed a priori
+# (SKILL.md "Limitations": "If hypotheses are added after-the-fact, family-wise
+# correction is invalidated. The register's registered_at field is the audit
+# anchor."). The four rows below (H001-H004) constitute the complete a-priori
+# family. A genuinely new hypothesis requires a NEW family_id, not an appended
+# row to this one. The append-only discipline records re-runs / status changes
+# of the EXISTING members, never the introduction of new members.
+#
+# DUAL-METHOD DESIGN (memo SECTION 6: docs/research_notes/
+#   research_market-scoping_2026-06-05.md)
+#   - correction_method: bh_fdr  -> FALSE-DISCOVERY-RATE control across the whole
+#       pre-registered family (Benjamini-Hochberg 1995). Primary family-level gate.
+#   - headline_method:   holm    -> FAMILY-WISE-ERROR control on the SINGLE
+#       confirmatory headline claim (Holm 1979 step-down). Holm is the more
+#       conservative FWER procedure reserved for the one pre-specified
+#       confirmatory estimand, not the full exploratory family.
+#   - Hansen 2005 SPA / White 2000 reality check are RESERVED for strategy-RETURN
+#       framings (a strategy universe with a Sharpe/return benchmark). H002 is a
+#       repeat-sales ECONOMETRICS study (log price-relative of same-PIN sale
+#       pairs) with no position, trade, or Sharpe -> SPA/reality-check do NOT
+#       apply here (feasibility memo template_fit_note,
+#       docs/methodology/methodology_data-feasibility_2026-06-22.md).
+#
+# REFERENCES (methods cited above)
+#   Benjamini, Y. & Hochberg, Y. (1995). Controlling the false discovery rate.
+#     J R Stat Soc B 57(1):289. https://doi.org/10.1111/j.2517-6161.1995.tb02031.x
+#   Holm, S. (1979). A simple sequentially rejective multiple test procedure.
+#     Scand J Stat 6(2):65.
+#   Hansen, P. R. (2005). A test for superior predictive ability.
+#     J Bus Econ Stat 23(4):365. https://doi.org/10.1198/073500105000000063
+#   White, H. (2000). A reality check for data snooping.
+#     Econometrica 68(5):1097. https://doi.org/10.1111/1468-0262.00152
+# =============================================================================
+
+family_id: lp-reit-core-2026
+created: 2026-06-22
+description: >-
+  Pre-registered core hypothesis family for lp-reit-lab (H001-H004): the four
+  backlog hypotheses on Lincoln Park / North-Side Chicago residential property
+  economics. Family scope is FIXED at registration; only H002 is feasible on
+  Cook County Assessor open data at registration time (H001/H003/H004 are
+  MLS/MRED-gated). All four are retained in the family denominator so that the
+  multiple-testing correction is not understated when the gated members become
+  testable on a future MLS acquisition.
+
+# --- Correction methods (pre-registered; do not modify post-hoc) --------------
+correction_method: bh_fdr   # justify: pre-registered; Benjamini-Hochberg 1995 FDR
+                            # control across the family (memo SECTION 6). Valid
+                            # values: hansen_spa | white_rc | bh_fdr | holm.
+headline_method: holm       # justify: pre-registered; Holm 1979 step-down FWER
+                            # control reserved for the SINGLE confirmatory
+                            # headline claim (memo SECTION 6).
+
+# --- SINGLE-OBSERVABLE-p REGIME (current state; finding mt-bhfdr-single-observable-7) ---
+# BH-FDR and Holm are procedures on a VECTOR of simultaneously-observed p-values.
+# At registration ONLY H002 is testable on the open panel (H001/H003/H004 are
+# MLS-gated, raw_p=null and CANNOT yield a p-value). With a single observable p
+# against the pre-registered m=4, BOTH procedures DEGENERATE to the same
+# single-test threshold:
+#   BH rank-1 threshold = (1/m)*alpha_FWE = 0.05/4 = 0.0125
+#   Holm step-1         = alpha_FWE/m     = 0.05/4 = 0.0125
+# They COINCIDE at alpha/m = 0.0125, so the operative gate on the lone H002 claim
+# is an alpha/m single-test threshold (Bonferroni-equivalent), NOT an FDR
+# procedure (FDR control is undefined/over-conservative with one observable p).
+# The full FDR p-VECTOR is re-evaluated ONLY when >=2 family members become
+# testable (e.g. on a future MLS acquisition). The m=4 denominator is retained
+# (pre-registered family scope) so the threshold is not understated, per Round-2
+# audit finding mt-bhfdr-single-observable-7. Ref: Benjamini-Hochberg 1995
+# (10.1111/j.2517-6161.1995.tb02031.x); Holm 1979.
+single_observable_regime:
+  observable_members: 1          # justify: only H002 testable on open data at registration
+  registered_family_m: 4         # justify: H001-H004 pre-registered scope; fixed a priori
+  operative_threshold: 0.0125    # justify: alpha_FWE/m = 0.05/4; BH-rank-1 == Holm-step-1 at one p
+  operative_rule: "alpha/m single-test threshold (Bonferroni-equivalent); BH-FDR and Holm coincide here"
+  reevaluate_fdr_when: ">=2 family members yield a p-value (gated member becomes testable)"
+
+# --- Family-wise alpha (pre-registered; do not modify post-hoc) ---------------
+alpha_FWE: 0.05  # justify: pre-registered family-wise alpha. 0.05 is the
+                 # conventional significance level (Fisher 1925, Statistical
+                 # Methods for Research Workers, ch. III — origin of the 5%
+                 # convention) and the level at which all cited methods are
+                 # calibrated (Benjamini-Hochberg 1995 controls FDR at level q;
+                 # Holm 1979 controls FWER at level alpha). No data-driven tuning:
+                 # the level is fixed a priori, BEFORE any p-value is observed,
+                 # which is the precondition for valid family-wise correction.
+                 # Frozen here; any change requires a new family_id.
+
+# --- Bootstrap resample count (used only if a row is gated via SPA/reality-check)
+# Not exercised by H002 (no strategy-return framing); retained for schema
+# completeness so a future strategy-return member inherits a documented default.
+n_boot: 1000  # justify: community-canonical bootstrap-replicate count
+              # (Davison & Hinkley 1997 §2.5.1; Efron & Tibshirani 1993 §19).
+              # Hansen 2005 / White 2000 prescribe no specific B.
+
+# --- Hypothesis register — append-only (re-runs/status only; NOT new members) -
+# raw_p / sample_size are null: no row has been fitted yet (pre-data registration).
+hypotheses:
+  - hid: H001
+    title: "Transit premium (rent/price decays with network distance to nearest 'L' stop)"
+    raw_p: null            # not yet run (pre-data registration)
+    sample_size: null      # not yet run
+    registered_at: 2026-06-22
+    status: deferred_mls_gated
+    # DEFERRED: hedonic transit-premium model needs condo structural controls
+    # (beds/bathrooms/building_sf/year_built) ABSENT from CCAO open data;
+    # MLS/MRED-gated. Missing MLS field(s): beds, bathrooms, building_sf,
+    # year_built. (feasibility memo, methodology_data-feasibility_2026-06-22.md)
+
+  - hid: H002
+    title: "School-catchment capitalization (boundary repeat-sales index)"
+    raw_p: null            # not yet run (pre-data registration)
+    sample_size: null      # not yet run
+    registered_at: 2026-06-22
+    status: designed  # frozen 2026-07-06 via /preregister; design sha 2ff817cb9fb6
+    # FEASIBLE NOW on open data. Repeat-sales (Bailey-Muth-Nourse 1963 /
+    # Case-Shiller 1987) differences out time-invariant unit quality -> needs NO
+    # beds/sqft. Inputs: CCAO same-PIN sale pairs + CPS attendance-boundary
+    # GeoJSON (elem u959-tya7, HS fkiq-5i7q) + ISBE Report-Card quality signal;
+    # renovation-contaminated pairs filtered via Chicago building-permit join
+    # (ydr8-5enu) between the two sale dates. Capitalization mechanism:
+    # Black 1999 (10.1162/003355399556070). This is the single CONFIRMATORY
+    # headline claim -> gated by headline_method (Holm) in addition to BH-FDR.
+
+  - hid: H003
+    title: "3BR liquidity (3BR units sell/lease faster than 1-2BR in LP tracts)"
+    raw_p: null            # not yet run (pre-data registration)
+    sample_size: null      # not yet run
+    registered_at: 2026-06-22
+    status: deferred_mls_gated
+    # DEFERRED: Cox survival needs a duration outcome (rental days-to-lease /
+    # days-on-market) plus configuration (beds); rental days-to-lease lives in
+    # MLS/MRED. Missing MLS field(s): days_to_lease, rental_dom, beds.
+    # (feasibility memo, methodology_data-feasibility_2026-06-22.md)
+
+  - hid: H004
+    title: "HOA drag (higher HOA + special-assessment risk lowers net yield)"
+    raw_p: null            # not yet run (pre-data registration)
+    sample_size: null      # not yet run
+    registered_at: 2026-06-22
+    status: deferred_mls_gated
+    # DEFERRED: HOA-drag net-yield model needs HOA fee + special-assessment
+    # history (per-listing/MLS only; IL Condo Act §22.1 disclosure surfaces only
+    # at due-diligence) plus gross rent and beds. Missing MLS field(s): hoa_fee,
+    # special_assessment_history, gross_rent, beds.
+    # (feasibility memo, methodology_data-feasibility_2026-06-22.md)

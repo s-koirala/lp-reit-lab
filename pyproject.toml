@@ -38,6 +38,12 @@ dev = [
     "nbqa",
     "jsonschema>=4.18",     # Draft 2020-12 support (R1-A schema)
 ]
+analysis = [
+    "openpyxl>=3.1.5",
+    "shapely>=2.1.2",
+    "statsmodels>=0.14.6",
+    "xlrd>=2.0.2",
+]
 
 [tool.uv]
 # No [build-system] declaration: lp-reit-lab is a NON-PACKAGE project (SKIE
@@ -60,10 +66,20 @@ ignore = ["PLR0913"]
 [tool.ruff.lint.per-file-ignores]
 # Test files compare against literal expected values (not magic constants).
 "tests/**" = ["PLR2004"]
+# The ingest CLI's documented exit-code contract (0/1/2/3/4 per failure class)
+# needs one return per outcome; collapsing them would obscure the contract.
+"scripts/ingest.py" = ["PLR0911"]
 # Colour-science module: keep the canonical OKLCH axis names (L, C, H) and the
 # LMS cone-response names (l, m, s) verbatim from the primary sources (Ottosson
 # 2020; CSS Color 4) so the transform verifies line-by-line against them.
 "scripts/wcag_contrast_audit.py" = ["N803", "N806", "E741"]
+# H002 power simulation: keep canonical econometric/linear-algebra matrix names
+# verbatim (design matrix X, weight matrix W, variance V/Vt/V0, sandwich XtWX,
+# cluster count G) so the WLS + cluster-robust-sandwich + Webb wild-bootstrap code
+# verifies line-by-line against Cameron-Gelbach-Miller 2008 / Webb 2023 / BMN 1963.
+# E501: the `# justify:` comments carry inline citations + derivations (CLAUDE.md
+# "no magic numbers"); wrapping them mid-citation harms the audit trail.
+"research/01_hypothesis_register/H002/power_sim_2026-06-22.py" = ["N803", "N806", "E501"]
 
 [tool.pytest.ini_options]
 pythonpath = [".", "src"]

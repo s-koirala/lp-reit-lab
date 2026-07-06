@@ -1,0 +1,35 @@
+# Domain invariants for validate-data (checked by scripts/validate_h002_inputs.py).
+# Every threshold cites its basis; observed-range notes are descriptive, not gates.
+
+cook_county_sales_panel:
+  pk: [pin, sale_date, sale_price]          # pandera surrogate key at ingest
+  pin_pattern: '^\d{14}$'                    # CCAO 14-digit PIN (zero-padded string)
+  sale_price_min_exclusive: 0                # price > 0 (schema)
+  arms_length_floor: 10000                   # CCAO sale_filter_less_than_10k flags <=10k
+  sale_date_min: "1999-01-01"                # CCAO sales coverage epoch
+  sale_date_max: "2026-07-06"                # snapshot (no-look-ahead)
+  lat_range: [41.4, 42.2]                    # Cook County bbox (ingest config)
+  lon_range: [-88.3, -87.5]
+  community_areas: ["6", "7", "8"]
+
+chicago_permits:
+  pk: [id]
+  # Share of rows where application_start_date <= issue_date. Not 1.0: a small
+  # number of upstream records carry entry-order reversals (observed live);
+  # they are tolerated (dates are informational for the reno flag, which uses
+  # issue_date only), but a broad reversal signals upstream corruption.
+  date_order_min_share: 0.99
+  issue_date_min: "2006-01-01"               # PERMITS_EPOCH (probed coverage 2006-01-03)
+  issue_date_max: "2026-07-06"               # snapshot
+  reported_cost_min: 0                       # negatives nulled at assembly (entry artifacts)
+  community_areas_nullable: ["6", "7", "8"]  # null allowed (bbox arm)
+
+cps_boundaries:
+  files: 40                                  # 20 school years x 2 levels
+  geometry_types: [Polygon, MultiPolygon]    # RFC 7946 (validated at ingest)
+  crs: WGS84                                  # CRS84/EPSG:4326 only
+
+isbe_report_card:
+  files: 32                                  # 20 data + 12 zip-era layouts
+  container_magic: [ZIP, OLE2]               # PKWARE APPNOTE / MS-CFB (at ingest)
+  sha_pins: config.ISBE_REPORT_CARD_FILES    # per-year expected digests

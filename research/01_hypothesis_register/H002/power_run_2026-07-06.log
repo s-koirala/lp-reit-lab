@@ -1,0 +1,63 @@
+[1] i.i.d. FLOOR  n/side = 111.9686 -> ceil 112 ; total 224
+
+[2] analytic DEFF cross-check  n_required = n_floor * DEFF (Kish):
+    m_bar  rho    DEFF     n/side   total
+      112  0.00   1.000      112      224
+      112  0.02   3.230      362      724
+      112  0.05   6.575      737     1474  <-- central
+      112  0.10  12.150     1361     2722
+      128  0.00   1.000      112      224
+      128  0.02   3.530      396      792
+      128  0.05   7.325      821     1642
+      128  0.10  13.650     1529     3058
+      140  0.00   1.000      112      224
+      140  0.02   3.774      423      846
+      140  0.05   7.935      889     1778
+      140  0.10  14.870     1666     3332
+      141  0.00   1.000      112      224
+      141  0.02   3.800      426      852
+      141  0.05   8.000      896     1792
+      141  0.10  15.000     1680     3360
+
+[3] MC power of the repeat-sales WLS boundary_side x period DiD differential
+    (cluster-level treatment so rho LOADS the contrast; heteroskedastic V(tau);
+     Webb six-point wild-cluster bootstrap one-sided test):
+    V(tau)=A+B*tau  A=0.01125  B=0.00298  (V(mean_hold)=0.02250=sigma^2)
+    N_PERIODS=28 quarterly dummies; WILD_B=399 bootstrap reps
+    m_bar  rho    MC n/side  total  G
+      112  0.00      168     336    3
+      112  0.02      543    1086   10
+      112  0.05     1105    2210   20  <-- central
+      112  0.10     2042    4084   36
+      128  0.00      168     336    3
+      128  0.02      594    1188    9
+      128  0.05     1231    2462   19
+      128  0.10     2294    4588   36
+      140  0.00      168     336    2
+      140  0.02      635    1270    9
+      140  0.05     1334    2668   19
+      140  0.10     2499    4998   36
+      141  0.00      168     336    2
+      141  0.02      639    1278    9
+      141  0.05     1344    2688   19
+      141  0.10     2520    5040   36
+
+[check] rho-monotonicity at m_bar=20 (required n should rise with rho):
+    rho=0.00  n/side=168
+    rho=0.02  n/side=543
+    rho=0.05  n/side=1105
+    rho=0.10  n/side=2042
+    monotonic(non-decreasing) in rho: True
+
+[OPERATIVE] central (rho=0.05, m_bar=112.5) n_required_for_power_80 = 1105/side = 2210 total
+
+[REPROLOG] emitted + verified. Mirror these into the markdown run-record table:
+    run_id: 1ab78e33e92a4a7182893026e3045d51
+    repro_log_path: logs/reproducibility/repro_log_1ab78e33e92a4a7182893026e3045d51.json
+    phase: validation
+    hypothesis_id: H002
+    rng_seed: 20260706
+    git_head: 6d0b450d1821c5abe6a9905dc136d701335dd61f
+    pip_freeze_sha256: 676fa96233dfde98201a3767d4c816a333b43c531959de8af452dfb769bb3f2e
+    env_id: 4948672ccfe9fff7edab52a1f4bc459a9029b9c012ba6a543f347039d100186c
+    config_resolved_sha256: fd5253df4469f4c256d3068c59060e2fa6b316ebc1dee27915c38896a8cf167b

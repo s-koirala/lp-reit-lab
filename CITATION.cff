@@ -44,4 +44,109 @@ keywords:
 
 # References — auto-populated by /cite-add (R1-C); each entry must conform
 # to CFF v1.2.0 reference schema. Start empty.
-references: []
+references:
+  - type: article
+    authors:
+      - family-names: "Black"
+        given-names: "S. E."
+    title: "Do Better Schools Matter? Parental Valuation of Elementary Education"
+    year: 1999
+    doi: "10.1162/003355399556070"
+    journal: "The Quarterly Journal of Economics"
+    volume: "114"
+    issue: "2"
+    pages: "577-599"
+  - type: article
+    authors:
+      - family-names: "Bayer"
+        given-names: "Patrick"
+      - family-names: "Ferreira"
+        given-names: "Fernando"
+      - family-names: "McMillan"
+        given-names: "Robert"
+    title: "A Unified Framework for Measuring Preferences for Schools and                         Neighborhoods"
+    year: 2007
+    doi: "10.1086/522381"
+    journal: "Journal of Political Economy"
+    volume: "115"
+    issue: "4"
+    pages: "588-638"
+  - type: article
+    authors:
+      - family-names: "Bailey"
+        given-names: "Martin J."
+      - family-names: "Muth"
+        given-names: "Richard F."
+      - family-names: "Nourse"
+        given-names: "Hugh O."
+    title: "A Regression Method for Real Estate Price Index Construction"
+    year: 1963
+    doi: "10.1080/01621459.1963.10480679"
+    journal: "Journal of the American Statistical Association"
+    volume: "58"
+    issue: "304"
+    pages: "933-942"
+  - type: article
+    authors:
+      - family-names: "Cameron"
+        given-names: "A. Colin"
+      - family-names: "Gelbach"
+        given-names: "Jonah B."
+      - family-names: "Miller"
+        given-names: "Douglas L."
+    title: "Bootstrap-Based Improvements for Inference with Clustered Errors"
+    year: 2008
+    doi: "10.1162/rest.90.3.414"
+    journal: "Review of Economics and Statistics"
+    volume: "90"
+    issue: "3"
+    pages: "414-427"
+  - type: article
+    authors:
+      - family-names: "Webb"
+        given-names: "Matthew D."
+    title: "Reworking wild bootstrap-based inference for clustered errors"
+    year: 2023
+    doi: "10.1111/caje.12661"
+    journal: "Canadian Journal of Economics/Revue canadienne d'économique"
+    volume: "56"
+    issue: "3"
+    pages: "839-858"
+  - type: article
+    authors:
+      - family-names: "Conley"
+        given-names: "T.G."
+    title: "GMM estimation with cross sectional dependence"
+    year: 1999
+    doi: "10.1016/s0304-4076(98)00084-0"
+    journal: "Journal of Econometrics"
+    volume: "92"
+    issue: "1"
+    pages: "1-45"
+  - type: article
+    authors:
+      - family-names: "Benjamini"
+        given-names: "Yoav"
+      - family-names: "Hochberg"
+        given-names: "Yosef"
+    title: "Controlling the False Discovery Rate: A Practical and Powerful Approach to Multiple Testing"
+    year: 1995
+    doi: "10.1111/j.2517-6161.1995.tb02031.x"
+    journal: "Journal of the Royal Statistical Society Series B: Statistical Methodology"
+    volume: "57"
+    issue: "1"
+    pages: "289-300"
+  - type: article
+    authors:
+      - family-names: "Bogin"
+        given-names: "Alexander"
+      - family-names: "Nguyen-Hoang"
+        given-names: "Phuong"
+    title: "PROPERTY LEFT BEHIND: AN UNINTENDED CONSEQUENCE OF A NO CHILD LEFT BEHIND “FAILING” SCHOOL DESIGNATION"
+    year: 2014
+    doi: "10.1111/jors.12141"
+    journal: "Journal of Regional Science"
+    volume: "54"
+    issue: "5"
+    pages: "788-805"
+

@@ -15,7 +15,7 @@ from __future__ import annotations
 import pandas as pd
 import pandera.pandas as pa
 
-from .config import CookCountyBounds
+from .config import PERMITS_EPOCH, TARGET_COMMUNITY_AREAS, CookCountyBounds
 
 _B = CookCountyBounds()
 
@@ -62,4 +62,54 @@ def property_sales_schema(snapshot_date: str | pd.Timestamp) -> pa.DataFrameSche
         unique=["pin", "sale_date", "sale_price"],
         report_duplicates="all",
         name="cook_county_property_sales",
+    )
+
+
+def building_permits_schema(snapshot_date: str | pd.Timestamp) -> pa.DataFrameSchema:
+    """Schema for the assembled Chicago building-permits panel.
+
+    `issue_date` is bounded by [PERMITS_EPOCH, snapshot] — the same
+    validation-enforced no-look-ahead gate as the sales panel. `id` is the
+    dataset's unique row id (the deterministic-sort key). `community_area` is
+    NULLABLE (the null-CA bbox arm keeps geocoding-gap permits, audit F-1-5)
+    but any non-null value must be a target area — a defense against silently
+    changed upstream filter semantics.
+    """
+    snap = pd.Timestamp(snapshot_date)
+    return pa.DataFrameSchema(
+        columns={
+            "id": pa.Column(str, nullable=False, coerce=True),
+            "permit_": pa.Column(str, nullable=True, coerce=True),
+            "permit_type": pa.Column(str, nullable=True, coerce=True),
+            "issue_date": pa.Column(
+                "datetime64[ns]",
+                checks=pa.Check.in_range(pd.Timestamp(PERMITS_EPOCH), snap),
+                nullable=False,
+                coerce=True,
+            ),
+            "application_start_date": pa.Column(
+                "datetime64[ns]", nullable=True, coerce=True
+            ),
+            "reported_cost": pa.Column(
+                "float64", checks=pa.Check.greater_than_or_equal_to(0),
+                nullable=True, coerce=True,
+            ),
+            "pin_list": pa.Column(str, nullable=True, coerce=True),
+            "community_area": pa.Column(
+                str, checks=pa.Check.isin(sorted(TARGET_COMMUNITY_AREAS)),
+                nullable=True, coerce=True,
+            ),
+            "latitude": pa.Column(
+                "float64", checks=pa.Check.in_range(_B.lat_min, _B.lat_max),
+                nullable=True, coerce=True,
+            ),
+            "longitude": pa.Column(
+                "float64", checks=pa.Check.in_range(_B.lon_min, _B.lon_max),
+                nullable=True, coerce=True,
+            ),
+        },
+        strict=False,
+        unique=["id"],
+        report_duplicates="all",
+        name="chicago_building_permits",
     )

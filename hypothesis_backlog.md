@@ -23,10 +23,10 @@ via [/hypothesis-new](https://github.com/s-koirala/dotfiles/tree/main/claude/com
 
 | HID | Tier | Title | Status | Mechanism citation | Notes |
 |---|---|---|---|---|---|
-| H001 | 1 | Transit premium: rent/price decays with network distance to nearest 'L' stop | proposed | Rosen 1974 ([10.1086/260169](https://doi.org/10.1086/260169)) | hedonic; control beds/sqft + tract FE; CTA GTFS distance |
-| H002 | 2 | School-catchment capitalization: top-ISBE / Oscar Mayer boundary raises constant-quality appreciation | proposed | Black 1999 ([10.1162/003355399556070](https://doi.org/10.1162/003355399556070)) — verify via /cite-add | boundary point-in-polygon; repeat-sales index |
-| H003 | 1 | 3BR liquidity: 3BR units sell/lease faster than 1–2BR in LP tracts | proposed | Anglin-Rutherford-Springer 2003 ([10.1023/A:1021526332732](https://doi.org/10.1023/A:1021526332732)) | Cox survival; PIN-clustered SEs |
-| H004 | 2 | HOA drag: higher HOA + pre-1980 special-assessment risk lowers net yield at equal gross rent | proposed | Geltner et al. (NOI/cap capitalization) — verify via /cite-add | carrying-cost; IL Condo Act §22.1 disclosure |
+| H001 | 1 | Transit premium: rent/price decays with network distance to nearest 'L' stop | proposed | Rosen 1974 ([10.1086/260169](https://doi.org/10.1086/260169)) | hedonic; control beds/sqft + tract FE; CTA GTFS distance \| DEFERRED 2026-06-22 — needs MLS structural attrs (beds/sqft) absent from CCAO open data; see methodology_data-feasibility_2026-06-22.md |
+| H002 | 2 | School-catchment capitalization: top-ISBE / Oscar Mayer boundary raises constant-quality appreciation | designed | Black 1999 ([10.1162/003355399556070](https://doi.org/10.1162/003355399556070)) — verify via /cite-add | boundary point-in-polygon; repeat-sales index \| FROZEN 2026-07-06 via /preregister; frozen_sha256=2ff817cb9fb6; freeze ReproLog run_id=ac27dca8402e43a5846c26e1102b61d5; n_required=1,105/side vs realized low-side 1,718 (futility PASS); confirmatory = ELEMENTARY boundaries, q_top=10, G*=G_noise=4.944, 250 m |
+| H003 | 1 | 3BR liquidity: 3BR units sell/lease faster than 1–2BR in LP tracts | proposed | Anglin-Rutherford-Springer 2003 ([10.1023/A:1021526332732](https://doi.org/10.1023/A:1021526332732)) | Cox survival; PIN-clustered SEs \| DEFERRED 2026-06-22 — needs MLS days-to-lease (DOM); MRED-gated |
+| H004 | 2 | HOA drag: higher HOA + pre-1980 special-assessment risk lowers net yield at equal gross rent | proposed | Geltner et al. (NOI/cap capitalization) — verify via /cite-add | carrying-cost; IL Condo Act §22.1 disclosure \| DEFERRED 2026-06-22 — needs MLS HOA + special-assessment history; per-listing only |
 
 ## Tiers
 

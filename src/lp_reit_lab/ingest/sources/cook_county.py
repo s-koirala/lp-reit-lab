@@ -13,7 +13,6 @@ reconstructed with the dataset's legacy filter flags.
 from __future__ import annotations
 
 import re
-import time
 from collections.abc import Sequence
 from typing import Any
 
@@ -21,7 +20,7 @@ import pandas as pd
 import requests
 
 from ..config import TARGET_COMMUNITY_AREAS, Assessment, CookCountyBounds, SocrataConfig
-from ..http_client import get_json
+from ..socrata import paged
 
 _SOC = SocrataConfig()
 _BOUNDS = CookCountyBounds()
@@ -57,23 +56,10 @@ def _valid_pins(pins: Sequence[str]) -> list[str]:
 def _paged(session: requests.Session, url: str, *, select: str, where: str, order: str,
            app_token: str | None = None, page_size: int = _SOC.page_size,
            max_rows: int | None = None) -> list[dict[str, Any]]:
-    """Deterministic offset pagination (`$order` must be a total order); optional cap."""
-    headers = {"X-App-Token": app_token} if app_token else None
-    rows: list[dict[str, Any]] = []
-    offset = 0
-    while True:
-        limit = page_size if max_rows is None else min(page_size, max_rows - len(rows))
-        if limit <= 0:
-            break
-        params = {"$select": select, "$where": where, "$order": order,
-                  "$limit": limit, "$offset": offset}
-        page = get_json(session, url, params=params, headers=headers)
-        rows.extend(page)
-        if len(page) < limit:
-            break
-        offset += len(page)
-        time.sleep(_SOC.courtesy_sleep_s)
-    return rows
+    """Cook-County-config binding of the shared deterministic pager (`ingest.socrata`)."""
+    return paged(session, url, select=select, where=where, order=order,
+                 app_token=app_token, page_size=page_size,
+                 courtesy_sleep_s=_SOC.courtesy_sleep_s, max_rows=max_rows)
 
 
 def fetch_parcel_universe(session: requests.Session, year: int, *,
