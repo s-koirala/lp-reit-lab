@@ -49,3 +49,8 @@
 *.xlsx binary
 *.docx binary
 *.pptx binary
+
+# H002 freeze-evidence data files: byte-stable working copies (their sha256s are
+# frozen in data/_manifest.json; autocrlf rewriting would drift the checksums)
+data/interim/*.csv text eol=lf
+data/interim/*.parquet binary

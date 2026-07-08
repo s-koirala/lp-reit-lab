@@ -19,6 +19,8 @@ A reproducible research toolkit for screening residential real estate in Lincoln
 | License | `MIT` |
 | Bootstrap date | `2026-06-05` |
 | Dotfiles HEAD | `608f5eb13c39` |
+| Data | Real open-data snapshot `2026-07-06` (CCAO sales panel, CPS boundary vintages SY0607–SY2526, Chicago permits, ISBE Report Cards rc2006–rc2025) — keyless, validated, checksummed in [data/_manifest.json](data/_manifest.json) |
+| Hypotheses | **H002 FROZEN 2026-07-06** ([design](research/01_hypothesis_register/H002/design.md), sha `2ff817cb9fb6…`; next step: the confirmatory repeat-sales boundary DiD fit). H001/H003/H004 deferred — MLS-gated ([runbook](docs/research_notes/dataaccess_mls-mred_2026-06-22.md)) |
 
 ## Layout
 
@@ -30,7 +32,8 @@ lp-reit-lab/
 ├── notebooks/            # exploratory (stripped via nbstripout)
 ├── data/
 │   ├── raw/              # read-only vendor pulls (gitignored)
-│   ├── interim/          # lossy transforms (gitignored)
+│   ├── interim/          # lossy transforms (gitignored, EXCEPT committed
+│   │                     #   price-free H002 freeze-evidence artifacts)
 │   ├── processed/        # analysis-ready (gitignored)
 │   └── external/         # reference data
 ├── docs/

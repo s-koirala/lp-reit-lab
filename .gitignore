@@ -40,7 +40,14 @@ venv/
 # Data (gitignored by default; un-ignore specific subdirs as needed)
 # =====================================================================
 data/raw/
-data/interim/
+# data/interim is a directory rule -> git never descends, so re-inclusion needs
+# the /* form (gitignore cannot re-include below an excluded DIRECTORY).
+data/interim/*
+# H002 freeze evidence (price-free, outcome-blind; design.md S11.2) — committed
+# by explicit exception so the frozen design's evidence chain ships with the repo.
+!data/interim/crosswalk_boundary_rcdts_2026-07-06.csv
+!data/interim/segment_structure_h002-frozen-cell_2026-07-06.csv
+!data/interim/pairs_geometry_h002_2026-07-06.parquet
 data/processed/*
 data/external/
 !data/_manifest.json
